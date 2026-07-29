@@ -1,24 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-:root {
-    --bg-light: #f4f6f9 !important;
-    --primary: #eeeeee !important;
-}
-
-/* Apply clean premium gray-blue background directly using Frappe's defaults */
+/* Apply clean background using Frappe's defaults */
 body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-    background-color: var(--bg-light, #f4f6f9) !important;
+    background-color: var(--bg-color) !important;
     background-image: none !important;
 }
 
-/* Make the main content blocks stand out with a premium white card look */
+/* Add top margin below navbar for customer portal pages */
+.page-content-wrapper,
+.bhairav-portal-sidebar {
+    margin-top: 3rem !important;
+}
+
+/* Make the main content blocks stand out with a premium card look utilizing default theme variables */
 .web-form-wrapper,
 .web-list-container {
     background-color: var(--bg-color, #ffffff) !important;
     border-radius: 12px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
-    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid var(--border-color, #e2e8f0) !important;
     padding: 2.5rem !important;
     margin-top: 1.5rem;
     margin-bottom: 2rem;
@@ -29,7 +30,7 @@ body {
 .web-form-title h1 {
     font-weight: 700 !important;
     letter-spacing: -0.03em !important;
-    color: var(--text-color, #1e293b) !important;
+    color: var(--text-color) !important;
 }
 
 /* Style the sidebar container (flat, no card wrapper) */
@@ -44,13 +45,13 @@ body {
 .portal-sidebar-heading {
     font-size: 1.25rem !important;
     font-weight: 700 !important;
-    color: var(--text-color, #1e293b) !important;
+    color: var(--text-color) !important;
     margin-bottom: 1.5rem !important;
     padding-left: 0.5rem;
     letter-spacing: -0.02em !important;
 }
 
-/* Style sidebar links */
+/* Style sidebar links using default Frappe variables */
 .sidebar-menu-list {
     padding-left: 0 !important;
 }
@@ -59,7 +60,7 @@ body {
     display: flex !important;
     align-items: center;
     padding: 0.75rem 1rem !important;
-    color: #475569 !important;
+    color: var(--text-muted, #6c757d) !important;
     text-decoration: none !important;
     border-radius: 8px !important;
     font-weight: 500 !important;
@@ -68,14 +69,14 @@ body {
 }
 
 .sidebar-item a:hover {
-    background-color: #f1f5f9 !important;
-    color: #1e293b !important;
+    background-color: var(--bg-light) !important;
+    color: var(--text-color) !important;
     padding-left: 1.25rem !important;
 }
 
 .sidebar-item a.active {
-    background-color: #dbeafe !important;
-    color: #1d4ed8 !important;
+    background-color: var(--bg-light) !important;
+    color: var(--primary-color, #1d4ed8) !important;
     font-weight: 600 !important;
 }
 
@@ -87,17 +88,17 @@ body {
 
 .table th {
     font-weight: 600 !important;
-    color: #64748b !important;
-    border-bottom: 2px solid #e2e8f0 !important;
+    color: var(--text-muted) !important;
+    border-bottom: 2px solid var(--border-color) !important;
     text-transform: uppercase !important;
     font-size: 0.75rem !important;
     letter-spacing: 0.05em !important;
 }
 
 .table td {
-    background-color: #ffffff !important;
-    border-top: 1px solid #f1f5f9 !important;
-    border-bottom: 1px solid #f1f5f9 !important;
+    background-color: var(--bg-color, #ffffff) !important;
+    border-top: 1px solid var(--border-color) !important;
+    border-bottom: 1px solid var(--border-color) !important;
     padding: 1rem 0.75rem !important;
     vertical-align: middle !important;
 }
