@@ -10,16 +10,14 @@ app_license = "mit"
 
 # required_apps = []
 
-# Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "bhairav_traders",
-# 		"logo": "/assets/bhairav_traders/logo.png",
-# 		"title": "Bhairav Traders",
-# 		"route": "/bhairav_traders",
-# 		"has_permission": "bhairav_traders.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "bhairav_traders",
+		"logo": "/assets/bhairav_traders/logo.png",
+		"title": "Bhairav Traders",
+		"route": "/portal"
+	}
+]
 
 # Includes in <head>
 # ------------------
@@ -29,9 +27,24 @@ app_license = "mit"
 # app_include_js = "/assets/bhairav_traders/js/bhairav_traders.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/bhairav_traders/css/bhairav_traders.css"
+web_include_css = "/assets/bhairav_traders/css/customer_portal.css"
 # web_include_js = "/assets/bhairav_traders/js/bhairav_traders.js"
 
+standard_portal_menu_items = [
+	{"title": "Place Order", "route": "/customer-order", "role": "Customer"},
+	{"title": "Pending Approvals", "route": "/portal/pending_approvals", "role": "Customer"},
+	{"title": "My Ledger", "route": "/customer-ledger", "role": "Customer"},
+	{"title": "Invoices", "route": "/customer-invoice", "role": "Customer"},
+	{"title": "Support Requests", "route": "/customer-support-request", "role": "Customer"},
+]
+
+update_website_context = "bhairav_traders.portal_utils.update_website_context"
+
+has_website_permission = {
+	"Sales Order": "bhairav_traders.portal_utils.has_sales_order_website_permission",
+	"Sales Invoice": "bhairav_traders.portal_utils.has_sales_invoice_website_permission",
+	"Customer Support Request": "bhairav_traders.portal_utils.has_customer_support_request_website_permission",
+}
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "bhairav_traders/public/scss/website"
 
@@ -86,7 +99,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "bhairav_traders.install.before_install"
-# after_install = "bhairav_traders.install.after_install"
+after_install = "bhairav_traders.install.after_install"
 
 # Uninstallation
 # ------------
@@ -138,34 +151,31 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Sales Order": {
+		"validate": "bhairav_traders.credit_limit.validate_sales_order_credit",
+		"after_insert": "bhairav_traders.credit_limit.after_insert_sales_order"
+	},
+	"Sales Invoice": {
+		"validate": "bhairav_traders.credit_limit.validate_sales_invoice_locking",
+		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment"
+	},
+	"Delivery Note": {
+		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment"
+	},
+	"Payment Entry": {
+		"on_submit": "bhairav_traders.discount.payment_entry_on_submit"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"bhairav_traders.tasks.all"
-# 	],
-# 	"daily": [
-# 		"bhairav_traders.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"bhairav_traders.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"bhairav_traders.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"bhairav_traders.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"daily": [
+		"bhairav_traders.credit_limit.sync_all_customer_lock_statuses"
+	]
+}
 
 # Testing
 # -------
@@ -205,7 +215,7 @@ app_license = "mit"
 
 # Request Events
 # ----------------
-# before_request = ["bhairav_traders.utils.before_request"]
+# before_request = ["bhairav_traders.portal_utils.before_request"]
 # after_request = ["bhairav_traders.utils.after_request"]
 
 # Job Events
@@ -255,4 +265,3 @@ app_license = "mit"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

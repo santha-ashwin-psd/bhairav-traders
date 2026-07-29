@@ -1,0 +1,53 @@
+{% macro render_sidebar_item(item) %}
+{%- set item_route = item.route[1:] if item.route[0] == '/' else item.route -%}
+<li class="sidebar-item">
+	<a href="{{ item.route }}" class="{{ 'active' if pathname == item_route or pathname == item.route else '' }}">
+		<!-- Removed icons -->
+		<span class="sidebar-title">{{ _(item.title) or _(item.label) }}</span>
+	</a>
+</li>
+{% endmacro %}
+
+{% macro render_sidebar_items(items) %}
+{%- if items and items | len > 0 -%}
+<ul class="list-unstyled sidebar-menu-list">
+	{% for item in items -%}
+	{{ render_sidebar_item(item) }}
+	{%- endfor %}
+</ul>
+{%- endif -%}
+{% endmacro %}
+
+<div class="web-sidebar bhairav-portal-sidebar">
+	<div class="sidebar-header">
+		<h5 class="portal-sidebar-heading">Bhairav Portal</h5>
+	</div>
+	<div class="sidebar-items">
+		{{ render_sidebar_items(sidebar_items) }}
+		
+		{% if frappe.user != 'Guest' %}
+		<div class="sidebar-user-section">
+			<ul class="list-unstyled sidebar-menu-list">
+				<li class="sidebar-item">
+					<a href="/me" class="">
+						<!-- Removed icon -->
+						<span class="sidebar-title">{{ _("My Account") }}</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+<script>
+	frappe.ready(function () {
+		$('.bhairav-portal-sidebar .sidebar-link').each(function () {
+			let current_href = window.location.pathname;
+			let link_href = $(this).attr('href');
+			if (link_href && current_href.includes(link_href)) {
+				$(this).addClass('active');
+			}
+		});
+	});
+</script>

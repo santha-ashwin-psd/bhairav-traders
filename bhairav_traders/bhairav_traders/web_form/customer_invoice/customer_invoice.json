@@ -1,0 +1,121 @@
+{
+    "allow_comments": 0,
+    "allow_delete": 0,
+    "allow_edit": 0,
+    "allow_incomplete": 0,
+    "allow_multiple": 0,
+    "allow_print": 1,
+    "anonymous": 0,
+    "apply_document_permissions": 1,
+    "button_label": "Submit",
+    "condition_json": "[]",
+    "creation": "2026-07-28 10:00:00",
+    "doc_type": "Sales Invoice",
+    "docstatus": 0,
+    "doctype": "Web Form",
+    "hide_footer": 0,
+    "hide_navbar": 0,
+    "idx": 0,
+    "is_standard": 1,
+    "key_required": 0,
+    "list_columns": [
+        {
+            "fieldname": "name",
+            "fieldtype": "Data",
+            "label": "Invoice No"
+        },
+        {
+            "fieldname": "posting_date",
+            "fieldtype": "Date",
+            "label": "Posting Date"
+        },
+        {
+            "fieldname": "due_date",
+            "fieldtype": "Date",
+            "label": "Payment Due Date"
+        },
+        {
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "label": "Status",
+            "options": "\nDraft\nReturn\nCredit Note Issued\nSubmitted\nPaid\nPartly Paid\nUnpaid\nUnpaid and Discounted\nPartly Paid and Discounted\nOverdue and Discounted\nOverdue\nCancelled\nInternal Transfer"
+        },
+        {
+            "fieldname": "outstanding_amount",
+            "fieldtype": "Currency",
+            "label": "Outstanding Amount",
+            "options": "party_account_currency"
+        },
+        {
+            "fieldname": "grand_total",
+            "fieldtype": "Currency",
+            "label": "Grand Total",
+            "options": "currency"
+        }
+    ],
+    "login_required": 1,
+    "max_attachment_size": 0,
+    "modified": "2026-07-28 17:41:13.511200",
+    "modified_by": "Administrator",
+    "module": "Bhairav Traders",
+    "name": "customer-invoice",
+    "owner": "Administrator",
+    "published": 1,
+    "route": "customer-invoice",
+    "show_attachments": 0,
+    "show_list": 1,
+    "show_sidebar": 0,
+    "success_message": "",
+    "success_title": "",
+    "title": "Invoices",
+    "web_form_fields": [
+        {
+            "allow_read_on_all_link_options": 0,
+            "fieldname": "posting_date",
+            "fieldtype": "Date",
+            "hidden": 0,
+            "label": "Posting Date",
+            "max_length": 0,
+            "max_value": 0,
+            "read_only": 1,
+            "reqd": 0,
+            "show_in_filter": 0
+        },
+        {
+            "allow_read_on_all_link_options": 0,
+            "fieldname": "due_date",
+            "fieldtype": "Date",
+            "hidden": 0,
+            "label": "Due Date",
+            "max_length": 0,
+            "max_value": 0,
+            "read_only": 1,
+            "reqd": 0,
+            "show_in_filter": 0
+        },
+        {
+            "allow_read_on_all_link_options": 0,
+            "fieldname": "grand_total",
+            "fieldtype": "Currency",
+            "hidden": 0,
+            "label": "Grand Total",
+            "max_length": 0,
+            "max_value": 0,
+            "read_only": 1,
+            "reqd": 0,
+            "show_in_filter": 0
+        },
+        {
+            "allow_read_on_all_link_options": 0,
+            "fieldname": "outstanding_amount",
+            "fieldtype": "Currency",
+            "hidden": 0,
+            "label": "Outstanding Amount",
+            "max_length": 0,
+            "max_value": 0,
+            "read_only": 1,
+            "reqd": 0,
+            "show_in_filter": 0
+        }
+    ]
+}

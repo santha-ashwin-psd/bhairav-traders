@@ -1,0 +1,130 @@
+{
+ "allow_comments": 0,
+ "allow_delete": 0,
+ "allow_edit": 0,
+ "allow_incomplete": 0,
+ "allow_multiple": 0,
+ "allow_print": 1,
+ "anonymous": 0,
+ "apply_document_permissions": 0,
+ "button_label": "Submit",
+ "condition_json": "[]",
+ "creation": "2026-07-28 10:00:00",
+ "doc_type": "Customer Ledger",
+ "docstatus": 0,
+ "doctype": "Web Form",
+ "hide_footer": 0,
+ "hide_navbar": 0,
+ "idx": 0,
+ "is_standard": 1,
+ "key_required": 0,
+ "list_columns": [
+  {
+   "fieldname": "voucher_no",
+   "fieldtype": "Data",
+   "label": "Voucher No"
+  },
+  {
+   "fieldname": "voucher_type",
+   "fieldtype": "Data",
+   "label": "Voucher Type"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "debit",
+   "fieldtype": "Currency",
+   "label": "Debit"
+  },
+  {
+   "fieldname": "credit",
+   "fieldtype": "Currency",
+   "label": "Credit"
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Currency",
+   "label": "Balance"
+  }
+ ],
+ "login_required": 1,
+ "max_attachment_size": 0,
+ "modified": "2026-07-28 16:37:10.983666",
+ "modified_by": "Administrator",
+ "module": "Bhairav Traders",
+ "name": "customer-ledger",
+ "owner": "Administrator",
+ "published": 1,
+ "route": "customer-ledger",
+ "show_attachments": 0,
+ "show_list": 1,
+ "show_sidebar": 0,
+ "success_message": "",
+ "success_title": "",
+ "title": "My Account Ledger",
+ "web_form_fields": [
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "hidden": 0,
+   "label": "Posting Date",
+   "max_length": 0,
+   "max_value": 0,
+   "read_only": 1,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "voucher_type",
+   "fieldtype": "Data",
+   "hidden": 0,
+   "label": "Voucher Type",
+   "max_length": 0,
+   "max_value": 0,
+   "read_only": 1,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "voucher_no",
+   "fieldtype": "Data",
+   "hidden": 0,
+   "label": "Voucher No",
+   "max_length": 0,
+   "max_value": 0,
+   "read_only": 1,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "debit",
+   "fieldtype": "Currency",
+   "hidden": 0,
+   "label": "Debit",
+   "max_length": 0,
+   "max_value": 0,
+   "read_only": 1,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "credit",
+   "fieldtype": "Currency",
+   "hidden": 0,
+   "label": "Credit",
+   "max_length": 0,
+   "max_value": 0,
+   "read_only": 1,
+   "reqd": 0,
+   "show_in_filter": 0
+  }
+ ]
+}

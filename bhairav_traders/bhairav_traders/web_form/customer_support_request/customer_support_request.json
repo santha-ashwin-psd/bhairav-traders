@@ -1,0 +1,111 @@
+{
+ "allow_comments": 0,
+ "allow_delete": 0,
+ "allow_edit": 0,
+ "allow_incomplete": 0,
+ "allow_multiple": 1,
+ "allow_print": 1,
+ "anonymous": 0,
+ "apply_document_permissions": 1,
+ "button_label": "Submit Request",
+ "condition_json": "[]",
+ "creation": "2026-07-28 10:00:00",
+ "doc_type": "Customer Support Request",
+ "docstatus": 0,
+ "doctype": "Web Form",
+ "hide_footer": 0,
+ "hide_navbar": 0,
+ "idx": 0,
+ "is_standard": 1,
+ "key_required": 0,
+ "list_columns": [
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "Billing & Payments\nOrder Issues\nProduct Inquiry\nTechnical Support\nOther"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  }
+ ],
+ "login_required": 1,
+ "max_attachment_size": 0,
+ "modified": "2026-07-28 16:53:43.646758",
+ "modified_by": "Administrator",
+ "module": "Bhairav Traders",
+ "name": "customer-support-request",
+ "owner": "Administrator",
+ "published": 1,
+ "route": "customer-support-request",
+ "show_attachments": 1,
+ "show_list": 1,
+ "show_sidebar": 0,
+ "success_message": "Your support request has been submitted successfully!",
+ "success_title": "Support Request Submitted",
+ "title": "Customer Support Request",
+ "web_form_fields": [
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "hidden": 0,
+   "label": "Subject",
+   "max_length": 0,
+   "max_value": 0,
+   "precision": "",
+   "read_only": 0,
+   "reqd": 1,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "hidden": 0,
+   "label": "Category",
+   "max_length": 0,
+   "max_value": 0,
+   "options": "Billing & Payments\nOrder Issues\nProduct Inquiry\nTechnical Support\nOther",
+   "precision": "",
+   "read_only": 0,
+   "reqd": 1,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "default": "Medium",
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "hidden": 0,
+   "label": "Priority",
+   "max_length": 0,
+   "max_value": 0,
+   "options": "Low\nMedium\nHigh",
+   "precision": "",
+   "read_only": 0,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "hidden": 0,
+   "label": "Description",
+   "max_length": 0,
+   "max_value": 0,
+   "precision": "",
+   "read_only": 0,
+   "reqd": 1,
+   "show_in_filter": 0
+  }
+ ]
+}
