@@ -125,3 +125,6 @@ def get_item_rate(item_code):
     if not price:
         price = frappe.db.get_value("Item", item_code, "standard_rate", ignore=1)
     return price or 0.0
+
+
+

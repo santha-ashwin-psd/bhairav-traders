@@ -4,6 +4,8 @@ app_publisher = "Bhairav Traders"
 app_description = "Customizations for Bhairav Traders"
 app_email = "admin@bhairavtraders.com "
 app_license = "mit"
+app_logo_url = "/assets/bhairav_traders/logo.png"
+
 
 # Apps
 # ------------------
@@ -97,6 +99,7 @@ has_website_permission = {
 
 # Installation
 # ------------
+
 
 # before_install = "bhairav_traders.install.before_install"
 after_install = "bhairav_traders.install.after_install"
