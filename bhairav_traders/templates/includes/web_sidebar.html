@@ -1,8 +1,20 @@
 {% macro render_sidebar_item(item) %}
 {%- set item_route = item.route[1:] if item.route[0] == '/' else item.route -%}
+{%- set icon_map = {
+    '/portal': 'home',
+    '/customer-order': 'plus',
+    '/customer-pending-approvals': 'clock',
+    '/customer-ledger': 'book',
+    '/customer-invoice': 'file-text',
+    '/customer-support-request': 'mail',
+    '/me': 'user'
+} -%}
+{%- set icon = icon_map.get(item.route) or 'file' -%}
 <li class="sidebar-item">
 	<a href="{{ item.route }}" class="{{ 'active' if pathname == item_route or pathname == item.route else '' }}">
-		<!-- Removed icons -->
+		<svg class="icon icon-md mr-2" style="width: 16px; height: 16px;">
+			<use href="#icon-{{ icon }}"></use>
+		</svg>
 		<span class="sidebar-title">{{ _(item.title) or _(item.label) }}</span>
 	</a>
 </li>
@@ -30,7 +42,9 @@
 			<ul class="list-unstyled sidebar-menu-list">
 				<li class="sidebar-item">
 					<a href="/me" class="">
-						<!-- Removed icon -->
+						<svg class="icon icon-md mr-2" style="width: 16px; height: 16px;">
+							<use href="#icon-user"></use>
+						</svg>
 						<span class="sidebar-title">{{ _("My Account") }}</span>
 					</a>
 				</li>

@@ -2,6 +2,15 @@ import frappe
 from frappe import _
 from frappe.utils import flt, today, date_diff, getdate, add_days
 
+def is_salesman_user(user):
+    if not user or user == "Guest":
+        return False
+    if user == "Administrator":
+        return True
+    user_roles = frappe.get_roles(user)
+    sales_roles = {"Salesman", "Sales User", "System Manager", "Accounts Manager", "Director"}
+    return bool(sales_roles.intersection(user_roles))
+
 def check_account_lock_status(customer_name):
     """
     Checks if customer has unpaid invoices exceeding credit_days_allowed (default 60 days).
@@ -73,9 +82,8 @@ def validate_sales_order_credit(doc, method=None):
             if getattr(item, "qty", None) and getattr(item, "rate", None):
                 item.amount = flt(item.qty) * flt(item.rate)
         
-    # Check if placed by salesman
-    user_roles = frappe.get_roles(frappe.session.user)
-    if "Customer" not in user_roles and frappe.session.user != "Guest":
+    # Check if placed by salesman (only on first creation)
+    if doc.is_new() and is_salesman_user(frappe.session.user):
         doc.placed_by_salesman = 1
         if not doc.customer_approval_status or doc.customer_approval_status == "Not Required":
             doc.customer_approval_status = "Pending"
@@ -202,8 +210,7 @@ def set_workflow_state(doc, state):
     frappe.db.set_value("Sales Order", doc.name, "workflow_state", state)
     doc.workflow_state = state
 
-    user_roles = frappe.get_roles(frappe.session.user)
-    is_salesman = "Customer" not in user_roles and frappe.session.user != "Guest"
+    is_salesman = is_salesman_user(frappe.session.user)
     
     if is_salesman:
         doc.placed_by_salesman = 1
@@ -217,8 +224,7 @@ def after_insert_sales_order(doc, method=None):
     Frappe blocks setting workflow_state directly during creation (insert),
     so we must bypass it immediately after insertion via set_value.
     """
-    user_roles = frappe.get_roles(frappe.session.user)
-    is_salesman = "Customer" not in user_roles and frappe.session.user != "Guest"
+    is_salesman = is_salesman_user(frappe.session.user)
     
     if is_salesman:
         frappe.db.set_value("Sales Order", doc.name, "workflow_state", "Pending Customer Approval")

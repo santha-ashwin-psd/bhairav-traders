@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-
 /* Apply clean background using Frappe's defaults */
 body {
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
     background-color: var(--bg-color) !important;
     background-image: none !important;
 }
@@ -34,71 +31,289 @@ body {
 }
 
 /* Style the sidebar container (flat, no card wrapper) */
+/* Style the sidebar container (flat, no card wrapper) */
+.sidebar-column {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+}
+
+.web-sidebar.bhairav-portal-sidebar,
 .bhairav-portal-sidebar {
     background-color: transparent !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     border: none !important;
     padding: 0 !important;
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
 }
 
-.portal-sidebar-heading {
-    font-size: 1.25rem !important;
+.bhairav-portal-sidebar .portal-sidebar-heading {
+    font-size: 1.15rem !important;
     font-weight: 700 !important;
     color: var(--text-color) !important;
-    margin-bottom: 1.5rem !important;
-    padding-left: 0.5rem;
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    padding: 0.6rem 0.8rem !important;
     letter-spacing: -0.02em !important;
+    text-align: left !important;
+    display: block !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.bhairav-portal-sidebar .sidebar-items {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: left !important;
+}
+
+.bhairav-portal-sidebar .sidebar-user-section {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: left !important;
+    margin-top: 1rem !important;
 }
 
 /* Style sidebar links using default Frappe variables */
-.sidebar-menu-list {
+.bhairav-portal-sidebar .sidebar-menu-list {
     padding-left: 0 !important;
-}
-
-.sidebar-item a {
+    list-style-type: none !important;
+    text-align: left !important;
     display: flex !important;
-    align-items: center;
-    padding: 0.75rem 1rem !important;
-    color: var(--text-muted, #6c757d) !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.bhairav-portal-sidebar .sidebar-item {
+    width: 100% !important;
+    text-align: left !important;
+    display: block !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.bhairav-portal-sidebar .sidebar-item a {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding: 0.6rem 0.8rem !important;
+    gap: 12px !important; /* Matches default Frappe Desk gap */
+    color: var(--text-color, #1f2937) !important;
     text-decoration: none !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     font-weight: 500 !important;
-    margin-bottom: 0.25rem !important;
-    transition: all 0.2s ease-in-out !important;
+    margin-bottom: 0.2rem !important;
+    transition: background-color 0.15s ease !important;
+    text-align: left !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
 }
 
-.sidebar-item a:hover {
-    background-color: var(--bg-light) !important;
-    color: var(--text-color) !important;
-    padding-left: 1.25rem !important;
+.bhairav-portal-sidebar .sidebar-item a svg {
+    margin: 0 !important; /* Overrides default Frappe margin: 0 auto; on .icon */
+    width: 16px !important;
+    height: 16px !important;
+    flex-shrink: 0 !important;
 }
 
-.sidebar-item a.active {
-    background-color: var(--bg-light) !important;
+.bhairav-portal-sidebar .sidebar-item a:hover {
+    background-color: var(--bg-light, #f3f4f6) !important;
+    color: var(--text-color, #111827) !important;
+}
+
+.bhairav-portal-sidebar .sidebar-item a.active {
+    background-color: var(--bg-light, #f3f4f6) !important;
     color: var(--primary-color, #1d4ed8) !important;
     font-weight: 600 !important;
 }
 
 /* Adjust table rendering for clean look */
 .table {
-    border-collapse: separate !important;
-    border-spacing: 0 0.5rem !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
 }
 
 .table th {
     font-weight: 600 !important;
-    color: var(--text-muted) !important;
-    border-bottom: 2px solid var(--border-color) !important;
+    color: var(--text-muted, #4b5563) !important;
+    border-bottom: 2px solid var(--border-color, #e5e7eb) !important;
     text-transform: uppercase !important;
     font-size: 0.75rem !important;
     letter-spacing: 0.05em !important;
+    padding: 0.75rem !important;
 }
 
 .table td {
-    background-color: var(--bg-color, #ffffff) !important;
-    border-top: 1px solid var(--border-color) !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    padding: 1rem 0.75rem !important;
+    border-bottom: 1px solid var(--border-color, #e5e7eb) !important;
+    padding: 0.75rem !important;
     vertical-align: middle !important;
+}
+
+/* ==========================================
+   Customer Portal Dashboard Styles
+   ========================================== */
+
+.bhairav-dashboard {
+    padding-top: 0.5rem;
+}
+
+/* Badges for Account Status */
+.badge-locked {
+    background-color: var(--alert-bg-danger, #fde8e8) !important;
+    color: var(--alert-text-danger, #9b1c1c) !important;
+    font-size: 0.8rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge-active {
+    background-color: var(--alert-bg-success, #def7ec) !important;
+    color: var(--alert-text-success, #03543f) !important;
+    font-size: 0.8rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Lock Warning Banner */
+.lock-banner {
+    background-color: var(--alert-bg-danger, #fde8e8) !important;
+    border: 1px solid var(--alert-border-danger, #f8b4b4) !important;
+    border-left: 4px solid var(--alert-text-danger, #9b1c1c) !important;
+    border-radius: 6px !important;
+    padding: 1rem !important;
+}
+
+/* KPI Cards Layout */
+.kpi-card {
+    background-color: var(--card-bg, #ffffff) !important;
+    border: 1px solid var(--border-color, #e5e7eb) !important;
+    border-radius: 8px !important;
+    padding: 1.25rem !important;
+}
+
+.kpi-card:hover {
+    border-color: var(--primary-color, #1d4ed8) !important;
+}
+
+/* Card Link Hover Trigger */
+.card-link {
+    cursor: pointer;
+}
+
+.card-link .kpi-card:hover {
+    border-color: var(--warning-color, #d97706) !important;
+}
+
+/* KPI Card Icons */
+.kpi-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background-color: var(--bg-light, #f9fafb);
+    color: var(--text-color) !important;
+}
+
+/* KPI Typography */
+.kpi-label {
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    display: block;
+    color: var(--text-muted, #6b7280) !important;
+    margin-top: 0.5rem;
+}
+
+.kpi-value {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: var(--text-color, #111827) !important;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.kpi-subtext {
+    font-size: 0.75rem !important;
+    color: var(--text-muted, #6b7280) !important;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+/* Quick Actions Styling */
+.quick-actions-bar {
+    background-color: var(--bg-light, #f9fafb) !important;
+    border: 1px solid var(--border-color, #e5e7eb) !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+}
+
+.gap-3 {
+    gap: 0.5rem;
+}
+
+/* Tables and Custom Badge Colors inside Dashboard */
+.activity-card {
+    background-color: var(--card-bg, #ffffff) !important;
+    border: 1px solid var(--border-color, #e5e7eb) !important;
+    border-radius: 8px !important;
+    padding: 1.25rem !important;
+}
+
+.card-section-title {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--text-color, #111827) !important;
+}
+
+.badge-success-light {
+    background-color: #def7ec !important;
+    color: #03543f !important;
+}
+
+.badge-danger-light {
+    background-color: #fde8e8 !important;
+    color: #9b1c1c !important;
+}
+
+.badge-warning-light {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+}
+
+.badge-info-light {
+    background-color: #e1f5fe !important;
+    color: #0284c7 !important;
+}
+
+.badge-secondary-light {
+    background-color: #f3f4f6 !important;
+    color: #4b5563 !important;
+}
+
+/* Hide checkbox column in Sales Order web form list view */
+body[data-path*="customer-order"] .web-list-table th:first-child,
+body[data-path*="customer-order"] .web-list-table td.list-col-checkbox {
+    display: none !important;
 }

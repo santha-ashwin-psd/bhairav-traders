@@ -29,12 +29,13 @@ add_to_apps_screen = [
 # app_include_js = "/assets/bhairav_traders/js/bhairav_traders.js"
 
 # include js, css files in header of web template
-web_include_css = "/assets/bhairav_traders/css/customer_portal.css"
+web_include_css = "/assets/bhairav_traders/css/customer_portal.css?v=17"
 # web_include_js = "/assets/bhairav_traders/js/bhairav_traders.js"
 
 standard_portal_menu_items = [
+	{"title": "Dashboard", "route": "/portal", "role": "Customer"},
 	{"title": "Place Order", "route": "/customer-order", "role": "Customer"},
-	{"title": "Pending Approvals", "route": "/portal/pending_approvals", "role": "Customer"},
+	{"title": "Pending Approvals", "route": "/customer-pending-approvals", "role": "Customer"},
 	{"title": "My Ledger", "route": "/customer-ledger", "role": "Customer"},
 	{"title": "Invoices", "route": "/customer-invoice", "role": "Customer"},
 	{"title": "Support Requests", "route": "/customer-support-request", "role": "Customer"},

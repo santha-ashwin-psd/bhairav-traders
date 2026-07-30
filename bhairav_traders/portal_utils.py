@@ -85,6 +85,7 @@ def get_item_search_results(doctype=None, txt="", searchfield=None, start=0, pag
 
 def get_portal_sidebar_items():
     return [
+        {"title": "Dashboard", "route": "/portal", "label": "Dashboard"},
         {"title": "Place Order", "route": "/customer-order", "label": "Place Order"},
         {"title": "Pending Approvals", "route": "/customer-pending-approvals", "label": "Pending Approvals"},
         {"title": "My Ledger", "route": "/customer-ledger", "label": "My Ledger"},
