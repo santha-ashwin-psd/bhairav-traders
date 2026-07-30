@@ -18,7 +18,7 @@ def get_support_requests(doctype, txt=None, filters=None, limit_start=0, limit_p
     return frappe.get_all(
         "Customer Support Request",
         filters={"customer": customer},
-        fields=["name", "subject", "category", "priority", "status", "creation"],
+        fields=["name", "subject", "category", "priority", "status", "creation", "description"],
         order_by="creation desc",
         limit_start=limit_start,
         limit_page_length=limit_page_length,

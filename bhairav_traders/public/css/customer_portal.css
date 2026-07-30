@@ -312,8 +312,8 @@ body {
     color: #4b5563 !important;
 }
 
-/* Hide checkbox column in Sales Order web form list view */
-body[data-path*="customer-order"] .web-list-table th:first-child,
-body[data-path*="customer-order"] .web-list-table td.list-col-checkbox {
+/* Hide checkbox column in all portal web form list views */
+.web-list-table th:first-child,
+.web-list-table td.list-col-checkbox {
     display: none !important;
 }

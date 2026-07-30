@@ -28,7 +28,7 @@ def get_context(context):
         context.tickets = frappe.get_all(
             "Customer Support Request",
             filters={"customer": customer},
-            fields=["name", "posting_date", "subject", "category", "priority", "status"],
+            fields=["name", "posting_date", "subject", "category", "priority", "status", "description"],
             order_by="creation desc"
         )
     else:
