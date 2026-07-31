@@ -29,7 +29,7 @@ add_to_apps_screen = [
 # app_include_js = "/assets/bhairav_traders/js/bhairav_traders.js"
 
 # include js, css files in header of web template
-web_include_css = "/assets/bhairav_traders/css/customer_portal.css?v=18"
+web_include_css = "/assets/bhairav_traders/css/customer_portal.css?v=24"
 # web_include_js = "/assets/bhairav_traders/js/bhairav_traders.js"
 
 standard_portal_menu_items = [

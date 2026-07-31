@@ -111,7 +111,8 @@ body {
     justify-content: flex-start !important;
     align-items: center !important;
     padding: 0.6rem 0.8rem !important;
-    gap: 12px !important; /* Matches default Frappe Desk gap */
+    gap: 12px !important;
+    /* Matches default Frappe Desk gap */
     color: var(--text-color, #1f2937) !important;
     text-decoration: none !important;
     border-radius: 6px !important;
@@ -125,7 +126,8 @@ body {
 }
 
 .bhairav-portal-sidebar .sidebar-item a svg {
-    margin: 0 !important; /* Overrides default Frappe margin: 0 auto; on .icon */
+    margin: 0 !important;
+    /* Overrides default Frappe margin: 0 auto; on .icon */
     width: 16px !important;
     height: 16px !important;
     flex-shrink: 0 !important;
@@ -168,31 +170,101 @@ body {
    Customer Portal Dashboard Styles
    ========================================== */
 
-.bhairav-dashboard {
-    padding-top: 0.5rem;
+/* Welcome Header & Title */
+.dashboard-header {
+    border-bottom: 1px solid var(--border-color, #f3f4f6);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem !important;
+}
+
+.dashboard-title {
+    font-size: 1.75rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+    color: var(--text-color, #111827) !important;
+}
+
+.dashboard-subtitle {
+    font-size: 0.875rem !important;
+    color: var(--text-muted, #6b7280) !important;
+    margin-top: 0.25rem;
 }
 
 /* Badges for Account Status */
 .badge-locked {
-    background-color: var(--alert-bg-danger, #fde8e8) !important;
-    color: var(--alert-text-danger, #9b1c1c) !important;
-    font-size: 0.8rem !important;
-    padding: 0.35rem 0.75rem !important;
-    border-radius: 4px !important;
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+    border: 1px solid #fecaca !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 50px !important;
     font-weight: 600 !important;
     display: inline-flex;
     align-items: center;
 }
 
 .badge-active {
-    background-color: var(--alert-bg-success, #def7ec) !important;
-    color: var(--alert-text-success, #03543f) !important;
-    font-size: 0.8rem !important;
-    padding: 0.35rem 0.75rem !important;
-    border-radius: 4px !important;
+    background-color: #dcfce7 !important;
+    color: #15803d !important;
+    border: 1px solid #bbf7d0 !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 50px !important;
     font-weight: 600 !important;
     display: inline-flex;
     align-items: center;
+}
+
+.pulse-green {
+    width: 8px;
+    height: 8px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+    animation: pulse-green-anim 2s infinite;
+}
+
+@keyframes pulse-green-anim {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+.pulse-red {
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    animation: pulse-red-anim 2s infinite;
+}
+
+@keyframes pulse-red-anim {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
 }
 
 /* Lock Warning Banner */
@@ -204,37 +276,121 @@ body {
     padding: 1rem !important;
 }
 
-/* KPI Cards Layout */
+/* KPI Cards Layout & Themes */
 .kpi-card {
-    background-color: var(--card-bg, #ffffff) !important;
-    border: 1px solid var(--border-color, #e5e7eb) !important;
-    border-radius: 8px !important;
-    padding: 1.25rem !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .kpi-card:hover {
-    border-color: var(--primary-color, #1d4ed8) !important;
+    transform: translateY(-3px);
 }
 
 /* Card Link Hover Trigger */
 .card-link {
     cursor: pointer;
+    text-decoration: none !important;
 }
 
-.card-link .kpi-card:hover {
-    border-color: var(--warning-color, #d97706) !important;
+.card-link:hover {
+    text-decoration: none !important;
 }
 
-/* KPI Card Icons */
+/* KPI Card Icons Base styling */
 .kpi-icon-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
-    background-color: var(--bg-light, #f9fafb);
-    color: var(--text-color) !important;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    transition: all 0.2s ease !important;
+}
+
+.kpi-icon-wrapper svg {
+    width: 22px !important;
+    height: 22px !important;
+}
+
+/* 1. Outstanding Balance: Red Theme */
+.kpi-card.card-outstanding {
+    background-color: #fff5f5 !important; /* soft red */
+    border: 1px solid #fee2e2 !important;
+}
+.kpi-card.card-outstanding:hover {
+    border-color: #fca5a5 !important;
+    box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.08) !important;
+}
+.kpi-card.card-outstanding .kpi-icon-wrapper {
+    background-color: #ffffff !important;
+    color: #ef4444 !important;
+    border: 1px solid #fee2e2 !important;
+}
+
+/* 2. Credit Limit: Blue Theme */
+.kpi-card.card-credit-limit {
+    background-color: #f0f7ff !important; /* soft blue */
+    border: 1px solid #dbeafe !important;
+}
+.kpi-card.card-credit-limit:hover {
+    border-color: #93c5fd !important;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.08) !important;
+}
+.kpi-card.card-credit-limit .kpi-icon-wrapper {
+    background-color: #ffffff !important;
+    color: #3b82f6 !important;
+    border: 1px solid #dbeafe !important;
+}
+
+/* 3. Available Credit: Green Theme */
+.kpi-card.card-remaining-credit {
+    background-color: #f3faf5 !important; /* soft green */
+    border: 1px solid #dcfce7 !important;
+}
+.kpi-card.card-remaining-credit:hover {
+    border-color: #86efac !important;
+    box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.08) !important;
+}
+.kpi-card.card-remaining-credit .kpi-icon-wrapper {
+    background-color: #ffffff !important;
+    color: #22c55e !important;
+    border: 1px solid #dcfce7 !important;
+}
+
+/* 4. Total Orders: Sky Theme */
+.kpi-card.card-total-orders {
+    background-color: #f0f9ff !important; /* soft sky blue */
+    border: 1px solid #e0f2fe !important;
+}
+.kpi-card.card-total-orders:hover {
+    border-color: #7dd3fc !important;
+    box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.08) !important;
+}
+.kpi-card.card-total-orders .kpi-icon-wrapper {
+    background-color: #ffffff !important;
+    color: #0ea5e9 !important;
+    border: 1px solid #e0f2fe !important;
+}
+
+/* 5. Pending Approvals: Amber Theme */
+.kpi-card.card-approvals {
+    background-color: #fffbeb !important; /* soft amber/yellow */
+    border: 1px solid #fef3c7 !important;
+}
+.kpi-card.card-approvals:hover {
+    border-color: #fde047 !important;
+    box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.08) !important;
+}
+.kpi-card.card-approvals .kpi-icon-wrapper {
+    background-color: #ffffff !important;
+    color: #f59e0b !important;
+    border: 1px solid #fef3c7 !important;
+}
+.kpi-card.card-approvals .kpi-icon-wrapper.no-approvals {
+    color: #9ca3af !important;
+    border: 1px solid #e5e7eb !important;
 }
 
 /* KPI Typography */
@@ -243,21 +399,42 @@ body {
     text-transform: uppercase;
     display: block;
     color: var(--text-muted, #6b7280) !important;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+    letter-spacing: 0.05em;
 }
 
 .kpi-value {
-    font-size: 1.5rem !important;
+    font-size: 1.6rem !important;
     font-weight: 700 !important;
     color: var(--text-color, #111827) !important;
     margin-top: 0.25rem;
     margin-bottom: 0;
 }
 
+.kpi-value.value-outstanding {
+    color: #dc2626 !important;
+}
+
+.kpi-value.value-credit-limit {
+    color: #2563eb !important;
+}
+
+.kpi-value.value-remaining-credit {
+    color: #16a34a !important;
+}
+
+.kpi-value.value-total-orders {
+    color: #0ea5e9 !important;
+}
+
+.kpi-value.value-approvals {
+    color: #d97706 !important;
+}
+
 .kpi-subtext {
     font-size: 0.75rem !important;
     color: var(--text-muted, #6b7280) !important;
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
     margin-bottom: 0;
 }
 
@@ -265,8 +442,8 @@ body {
 .quick-actions-bar {
     background-color: var(--bg-light, #f9fafb) !important;
     border: 1px solid var(--border-color, #e5e7eb) !important;
-    border-radius: 8px !important;
-    padding: 1rem !important;
+    border-radius: 10px !important;
+    padding: 1.25rem !important;
 }
 
 .gap-3 {
@@ -277,39 +454,127 @@ body {
 .activity-card {
     background-color: var(--card-bg, #ffffff) !important;
     border: 1px solid var(--border-color, #e5e7eb) !important;
-    border-radius: 8px !important;
-    padding: 1.25rem !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01) !important;
 }
 
 .card-section-title {
-    font-size: 1rem !important;
+    font-size: 1.05rem !important;
     font-weight: 700 !important;
     color: var(--text-color, #111827) !important;
 }
 
 .badge-success-light {
-    background-color: #def7ec !important;
-    color: #03543f !important;
+    background-color: #dcfce7 !important;
+    color: #15803d !important;
+    border: 1px solid #bbf7d0 !important;
 }
 
 .badge-danger-light {
-    background-color: #fde8e8 !important;
-    color: #9b1c1c !important;
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+    border: 1px solid #fecaca !important;
 }
 
 .badge-warning-light {
     background-color: #fef3c7 !important;
-    color: #92400e !important;
+    color: #b45309 !important;
+    border: 1px solid #fde68a !important;
 }
 
 .badge-info-light {
-    background-color: #e1f5fe !important;
-    color: #0284c7 !important;
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    border: 1px solid #bae6fd !important;
 }
 
 .badge-secondary-light {
     background-color: #f3f4f6 !important;
     color: #4b5563 !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+/* Modern Activity Item Cards */
+.activity-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.activity-item-card {
+    background-color: var(--card-bg, #ffffff) !important;
+    border: 1px solid var(--border-color, #f3f4f6) !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+    transition: all 0.2s ease-in-out !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block !important;
+}
+
+.activity-item-card:hover {
+    border-color: var(--border-color, #e5e7eb) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
+    transform: translateX(3px);
+    text-decoration: none !important;
+}
+
+.activity-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.activity-item-title {
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    color: var(--text-color, #111827) !important;
+}
+
+.activity-item-date {
+    font-size: 0.75rem !important;
+    color: var(--text-muted, #6b7280) !important;
+}
+
+.activity-item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.activity-item-value {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--text-color, #111827) !important;
+}
+
+.activity-item-badges {
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+}
+
+.activity-item-outstanding {
+    font-size: 0.8rem !important;
+    color: #dc2626 !important;
+    font-weight: 600 !important;
+    background-color: #fef2f2;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #fee2e2;
+}
+
+.badge-pill-status {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    padding: 0.15rem 0.5rem !important;
+    border-radius: 12px !important;
+    display: inline-block;
 }
 
 /* Hide checkbox column in all portal web form list views */
