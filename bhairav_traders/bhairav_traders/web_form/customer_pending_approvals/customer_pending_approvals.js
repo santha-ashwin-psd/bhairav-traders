@@ -1,52 +1,87 @@
-import frappe
-from bhairav_traders.portal_utils import update_website_context, get_current_customer
+frappe.ready(function() {
+	function setup_buttons() {
+		// Wait until DOM is fully loaded and Frappe has rendered the form fields
+		if ($('[data-fieldname="customer_approval_status"]').length === 0) {
+			setTimeout(setup_buttons, 200);
+			return;
+		}
 
+		// Prevent duplicate buttons
+		if ($('#btn-approve-order').length > 0) {
+			return;
+		}
 
-def get_context(context):
-	if frappe.session.user == "Guest":
-		frappe.local.flags.redirect_location = "/login?redirect-to=/customer-pending-approvals"
-		raise frappe.Redirect
+		let order_name = frappe.web_form.doc_name || window.location.pathname.split('/').pop();
+		if (!order_name || order_name === 'new' || order_name === 'list' || order_name === 'customer-pending-approvals') {
+			return;
+		}
 
-	update_website_context(context)
+		// Extract status from the read-only DOM element
+		let status_el = $('[data-fieldname="customer_approval_status"]');
+		let status = status_el.find('.control-value').text().trim() || status_el.val() || status_el.text().trim();
+		
+		if (!status.includes("Pending")) {
+			return;
+		}
 
-	customer = get_current_customer()
-	if not customer:
-		frappe.throw("No customer account linked to this user.", frappe.PermissionError)
+		// Prepend action buttons to the main wrapper
+		let container = $('.web-form-wrapper');
+		if (container.length === 0) container = $('.page_content, .page-content');
+		
+		container.prepend(`
+			<div class="web-form-actions text-right" style="margin-bottom: 20px;">
+				<button class="btn btn-success btn-sm" id="btn-approve-order">Approve Order</button>
+				<button class="btn btn-danger btn-sm ml-2" id="btn-reject-order">Reject Order</button>
+			</div>
+		`);
 
-	context.customer = customer
+		$('#btn-approve-order').on('click', function (e) {
+			e.preventDefault();
+			frappe.confirm('Are you sure you want to approve this order?', () => {
+				frappe.call({
+					method: 'bhairav_traders.portal_utils.approve_customer_order',
+					args: {
+						order_name: order_name
+					},
+					callback: function (r) {
+						if (!r.exc) {
+							frappe.msgprint('Order Approved Successfully');
+							setTimeout(() => window.location.reload(), 1500);
+						}
+					}
+				});
+			});
+		});
 
+		$('#btn-reject-order').on('click', function (e) {
+			e.preventDefault();
+			frappe.prompt([
+				{
+					fieldname: 'reason',
+					fieldtype: 'Small Text',
+					label: 'Reason for Rejection',
+					reqd: 1
+				}
+			],
+				function (values) {
+					frappe.call({
+						method: 'bhairav_traders.portal_utils.reject_customer_order',
+						args: {
+							order_name: order_name,
+							reason: values.reason
+						},
+						callback: function (r) {
+							if (!r.exc) {
+								frappe.msgprint('Order Rejected');
+								setTimeout(() => window.location.reload(), 1500);
+							}
+						}
+					});
+				},
+				'Reject Order',
+				'Submit');
+		});
+	}
 
-def get_list_context(context):
-	update_website_context(context)
-	context.get_list = get_pending_approvals
-
-
-def get_pending_approvals(
-	doctype, txt=None, filters=None,
-	limit_start=0, limit_page_length=20,
-	order_by="creation desc", **kwargs
-):
-	customer = get_current_customer()
-	if not customer:
-		return []
-
-	return frappe.get_all(
-		"Sales Order",
-		filters={
-			"customer": customer,
-			"customer_approval_status": "Pending",
-		},
-		fields=["name", "transaction_date", "grand_total", "customer_approval_status"],
-		order_by="creation desc",
-		limit_start=limit_start,
-		limit_page_length=limit_page_length,
-		ignore_permissions=True,
-	)
-
-
-def has_website_permission(doc, ptype, user, verbose=False):
-	"""Allow customer to open only their own Sales Orders on portal."""
-	customer = get_current_customer()
-	if customer and doc.customer == customer:
-		return True
-	return False
+	setTimeout(setup_buttons, 500);
+});

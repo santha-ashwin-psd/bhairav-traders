@@ -17,6 +17,11 @@ def after_install():
         ns.save(ignore_permissions=True)
         print("Navbar Settings logo configured successfully.")
 
+        # 3. Setup custom fields and Customer portal permissions
+        from bhairav_traders.custom_fields import setup_custom_fields
+        setup_custom_fields()
+        print("Custom fields and permissions set up successfully.")
+
         # Commit DB changes and clear cache
         frappe.db.commit()
         frappe.clear_cache()

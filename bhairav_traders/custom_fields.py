@@ -68,6 +68,26 @@ def setup_custom_fields():
     
     create_custom_fields(custom_fields, ignore_validate=True)
     setup_customer_portal_permissions()
+    sync_portal_web_forms()
+    frappe.db.commit()
+    frappe.clear_cache()
+
+def sync_portal_web_forms():
+    """
+    Ensure portal web forms use has_website_permission hooks instead of
+    standard document permissions. When apply_document_permissions=1, Frappe
+    bypasses has_website_permission hooks and only checks role-based DocPerms,
+    which causes 403 for Customer portal users who rely on those hooks.
+    """
+    web_forms = ["customer-pending-approvals", "customer-invoice"]
+    for wf_name in web_forms:
+        if frappe.db.exists("Web Form", wf_name):
+            try:
+                current = frappe.db.get_value("Web Form", wf_name, "apply_document_permissions")
+                if current:
+                    frappe.db.set_value("Web Form", wf_name, "apply_document_permissions", 0)
+            except Exception as e:
+                frappe.log_error(f"Error updating web form {wf_name}: {e}")
 
 def setup_customer_portal_permissions():
     """

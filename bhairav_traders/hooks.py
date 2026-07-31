@@ -30,7 +30,7 @@ add_to_apps_screen = [
 
 # include js, css files in header of web template
 web_include_css = "/assets/bhairav_traders/css/customer_portal.css?v=24"
-# web_include_js = "/assets/bhairav_traders/js/bhairav_traders.js"
+web_include_js = "/assets/bhairav_traders/js/customer_portal.js?v=1"
 
 standard_portal_menu_items = [
 	{"title": "Dashboard", "route": "/portal", "role": "Customer"},
@@ -104,6 +104,7 @@ has_website_permission = {
 
 # before_install = "bhairav_traders.install.before_install"
 after_install = "bhairav_traders.install.after_install"
+after_migrate = "bhairav_traders.custom_fields.setup_custom_fields"
 
 # Uninstallation
 # ------------
@@ -147,9 +148,9 @@ after_install = "bhairav_traders.install.after_install"
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
 #
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+has_permission = {
+	"Sales Order": "bhairav_traders.portal_utils.has_sales_order_permission",
+}
 
 # Document Events
 # ---------------

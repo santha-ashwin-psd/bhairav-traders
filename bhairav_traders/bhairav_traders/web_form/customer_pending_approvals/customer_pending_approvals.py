@@ -44,9 +44,4 @@ def get_pending_approvals(
     )
 
 
-def has_website_permission(doc, ptype, user, verbose=False):
-    """Allow customer to open only their own Sales Orders on portal."""
-    customer = get_current_customer()
-    if customer and doc.customer == customer:
-        return True
-    return False
+

@@ -1,12 +1,58 @@
 frappe.ready(function () {
+    let has_credit = true;
+    let customer_name = "";
+
+    frappe.call({
+        method: "bhairav_traders.portal_utils.get_customer_credit_limit",
+        callback: function (r) {
+            if (r.message === 0) {
+                has_credit = false;
+            }
+        }
+    });
+
     frappe.call({
         method: "bhairav_traders.portal_utils.get_logged_in_customer_details",
         callback: function (r) {
             if (r.message && r.message.customer) {
                 frappe.web_form.set_value('customer', r.message.customer);
+                customer_name = r.message.customer_name || r.message.customer;
             }
         }
     });
+
+    let confirm_shown = false;
+
+    frappe.web_form.validate = () => {
+        if (!has_credit && !confirm_shown) {
+            // Temporarily disable frappe.msgprint to completely swallow the "Validation Error" modal
+            let _original_msgprint = frappe.msgprint;
+            frappe.msgprint = function() {};
+            
+            // Restore msgprint after Frappe finishes its internal validation routines
+            setTimeout(() => {
+                frappe.msgprint = _original_msgprint;
+            }, 500);
+
+            let msg = `Notice: No credit limit is issued for customer '${customer_name}'. Order will be executed on advance payment.`;
+            
+            frappe.ui.portal_confirm("Confirmation Required", msg, function() {
+                confirm_shown = true;
+                $('.web-form-actions .btn-primary').click();
+            });
+
+            // Hide the default "Couldn't save" error that pops up when returning false
+            setTimeout(() => {
+                if (frappe.hide_msgprint) {
+                    frappe.hide_msgprint();
+                } else if ($('.msgprint-dialog').length) {
+                    $('.msgprint-dialog').modal('hide');
+                }
+            }, 10);
+            return false;
+        }
+        return true;
+    };
 
     frappe.web_form.set_query("item_code", "items", function (doc, cdt, cdn) {
         return {

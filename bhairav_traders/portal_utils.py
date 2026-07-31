@@ -37,19 +37,18 @@ def _ensure_portal_user_linked(user_email, customer):
         pass  # Non-fatal
 
 def _check_doc_customer_permission(doctype, doc):
+    if frappe.session.user == "Administrator":
+        return True
     customer = get_current_customer()
     if not customer:
-        return None # Let standard Frappe permissions handle non-customer users (like Administrator)
-
+        return False
     docname = doc if isinstance(doc, str) else getattr(doc, "name", None)
     if docname:
         doc_customer = frappe.db.get_value(doctype, docname, "customer")
     else:
         doc_customer = getattr(doc, "customer", None)
 
-    if doc_customer == customer:
-        return True
-    return False
+    return doc_customer == customer
 
 def has_sales_order_website_permission(doc, ptype, user, verbose=False):
     return _check_doc_customer_permission("Sales Order", doc)
@@ -60,6 +59,22 @@ def has_sales_invoice_website_permission(doc, ptype, user, verbose=False):
 def has_customer_support_request_website_permission(doc, ptype, user, verbose=False):
     return _check_doc_customer_permission("Customer Support Request", doc)
 
+def has_sales_order_permission(doc, ptype="read", user=None):
+    """Desk & Web Form permission hook. Grant if it's the customer's own order, otherwise fallback to standard permissions."""
+    customer = get_current_customer()
+    if customer:
+        docname = doc if isinstance(doc, str) else getattr(doc, "name", None)
+        if docname:
+            doc_customer = frappe.db.get_value("Sales Order", docname, "customer")
+        else:
+            doc_customer = getattr(doc, "customer", None)
+            
+        if doc_customer == customer:
+            return True
+            
+    return None
+
+
 @frappe.whitelist()
 def get_logged_in_customer_details():
     customer = get_current_customer()
@@ -68,6 +83,15 @@ def get_logged_in_customer_details():
         "customer": customer,
         "customer_name": customer_name
     }
+
+@frappe.whitelist()
+def get_customer_credit_limit():
+    from frappe.utils import flt
+    customer = get_current_customer()
+    if customer:
+        limit = frappe.db.get_value("Customer Credit Limit", {"parent": customer}, "credit_limit")
+        return flt(limit) if limit else 0.0
+    return 0.0
 
 @frappe.whitelist(allow_guest=False)
 def get_item_search_results(doctype=None, txt="", searchfield=None, start=0, page_len=10, filters=None):
@@ -127,5 +151,38 @@ def get_item_rate(item_code):
         price = frappe.db.get_value("Item", item_code, "standard_rate", ignore=1)
     return price or 0.0
 
+@frappe.whitelist()
+def approve_customer_order(order_name):
+    customer = get_current_customer()
+    if not customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    doc = frappe.get_doc("Sales Order", order_name)
+    if doc.customer != customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    if doc.customer_approval_status != "Pending":
+        frappe.throw("Order is not pending approval.")
+        
+    frappe.db.set_value("Sales Order", order_name, "customer_approval_status", "Approved")
+    return "Success"
 
-
+@frappe.whitelist()
+def reject_customer_order(order_name, reason):
+    customer = get_current_customer()
+    if not customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    doc = frappe.get_doc("Sales Order", order_name)
+    if doc.customer != customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    if doc.customer_approval_status != "Pending":
+        frappe.throw("Order is not pending approval.")
+        
+    frappe.db.set_value("Sales Order", order_name, "customer_approval_status", "Rejected")
+    
+    # We might want to store the reason in a custom field or comments, for now we add a comment
+    doc.add_comment("Comment", text=f"Rejected by customer. Reason: {reason}")
+    # add_comment saves the comment to the Communication table, no need to save the SO doc itself.
+    return "Success"

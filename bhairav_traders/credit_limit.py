@@ -111,9 +111,6 @@ def validate_sales_order_credit(doc, method=None):
     if credit_limit <= 0:
         # Condition 1: No credit limit -> Advance Payment Required
         doc.requires_advance_payment = 1
-        frappe.msgprint(
-            _("Notice: No credit limit is issued for customer '{0}'. Order will be executed on advance payment.").format(doc.customer)
-        )
     else:
         doc.requires_advance_payment = 0
         # Condition 2: Check total exposure against credit limit

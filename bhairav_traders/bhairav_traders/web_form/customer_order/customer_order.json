@@ -1,112 +1,106 @@
 {
- "allow_comments": 0,
- "allow_delete": 1,
- "allow_edit": 0,
- "allow_incomplete": 0,
- "allow_multiple": 1,
- "allow_print": 1,
- "anonymous": 0,
- "apply_document_permissions": 1,
- "button_label": "Place Sales Order",
- "condition_json": "[]",
- "creation": "2026-07-30 10:47:32.113054",
- "doc_type": "Sales Order",
- "docstatus": 0,
- "doctype": "Web Form",
- "hide_footer": 0,
- "hide_navbar": 0,
- "idx": 0,
- "is_standard": 1,
- "key_required": 0,
- "list_columns": [
-  {
-   "fieldname": "name",
-   "fieldtype": "Link",
-   "label": "Order ID"
-  },
-  {
-   "fieldname": "transaction_date",
-   "fieldtype": "Date",
-   "label": "Date"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "\nDraft\nOn Hold\nTo Pay\nTo Deliver and Bill\nTo Bill\nTo Deliver\nCompleted\nCancelled\nClosed"
-  },
-  {
-   "fieldname": "customer_approval_status",
-   "fieldtype": "Select",
-   "label": "Customer Approval Status",
-   "options": "Not Required\nPending\nApproved\nRejected"
-  },
-  {
-   "fieldname": "grand_total",
-   "fieldtype": "Currency",
-   "label": "Grand Total",
-   "options": "currency"
-  },
-  {
-   "fieldname": "delivery_status",
-   "fieldtype": "Select",
-   "label": "Delivery Status",
-   "options": "Not Delivered\nFully Delivered\nPartly Delivered\nClosed\nNot Applicable"
-  }
- ],
- "login_required": 1,
- "max_attachment_size": 0,
- "modified": "2026-07-30 10:56:01.505325",
- "modified_by": "Administrator",
- "module": "Bhairav Traders",
- "name": "customer-order",
- "owner": "Administrator",
- "published": 1,
- "route": "customer-order",
- "show_attachments": 0,
- "show_list": 1,
- "show_sidebar": 0,
- "success_message": "Your Sales Order has been submitted successfully!",
- "success_title": "Order Placed",
- "title": "Sales Order",
- "web_form_fields": [
-  {
-   "allow_read_on_all_link_options": 0,
-   "fieldname": "customer",
-   "fieldtype": "Link",
-   "hidden": 0,
-   "label": "Customer",
-   "max_length": 0,
-   "max_value": 0,
-   "options": "Customer",
-   "read_only": 0,
-   "reqd": 1,
-   "show_in_filter": 0
-  },
-  {
-   "allow_read_on_all_link_options": 0,
-   "fieldname": "delivery_date",
-   "fieldtype": "Date",
-   "hidden": 0,
-   "label": "Requested Delivery Date",
-   "max_length": 0,
-   "max_value": 0,
-   "read_only": 0,
-   "reqd": 1,
-   "show_in_filter": 0
-  },
-  {
-   "allow_read_on_all_link_options": 0,
-   "fieldname": "items",
-   "fieldtype": "Table",
-   "hidden": 0,
-   "label": "Order Items",
-   "max_length": 0,
-   "max_value": 0,
-   "options": "Sales Order Item",
-   "read_only": 0,
-   "reqd": 1,
-   "show_in_filter": 0
-  }
- ]
+    "allow_comments": 0,
+    "allow_delete": 0,
+    "allow_edit": 0,
+    "allow_incomplete": 0,
+    "allow_multiple": 1,
+    "allow_print": 1,
+    "anonymous": 0,
+    "apply_document_permissions": 1,
+    "button_label": "Sales Order",
+    "condition_json": "[]",
+    "creation": "2026-07-30 10:47:32.113054",
+    "doc_type": "Sales Order",
+    "docstatus": 0,
+    "doctype": "Web Form",
+    "hide_footer": 0,
+    "hide_navbar": 0,
+    "idx": 0,
+    "is_standard": 1,
+    "key_required": 0,
+    "list_columns": [
+        {
+            "fieldname": "name",
+            "fieldtype": "Link",
+            "label": "Order ID"
+        },
+        {
+            "fieldname": "transaction_date",
+            "fieldtype": "Date",
+            "label": "Date"
+        },
+        {
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "label": "Status",
+            "options": "\nDraft\nOn Hold\nTo Pay\nTo Deliver and Bill\nTo Bill\nTo Deliver\nCompleted\nCancelled\nClosed"
+        },
+        {
+            "fieldname": "grand_total",
+            "fieldtype": "Currency",
+            "label": "Grand Total",
+            "options": "currency"
+        },
+        {
+            "fieldname": "customer_approval_status",
+            "fieldtype": "Select",
+            "label": "Customer Approval Status",
+            "options": "Not Required\nPending\nApproved\nRejected"
+        }
+    ],
+    "login_required": 1,
+    "max_attachment_size": 0,
+    "modified": "2026-07-31 13:28:43.905746",
+    "modified_by": "Administrator",
+    "module": "Bhairav Traders",
+    "name": "customer-order",
+    "owner": "Administrator",
+    "published": 1,
+    "route": "customer-order",
+    "show_attachments": 0,
+    "show_list": 1,
+    "show_sidebar": 0,
+    "success_message": "Your Sales Order has been submitted successfully!",
+    "success_title": "Order Placed",
+    "title": "Sales Order",
+    "web_form_fields": [
+        {
+            "allow_read_on_all_link_options": 0,
+            "fieldname": "customer",
+            "fieldtype": "Link",
+            "hidden": 0,
+            "label": "Customer",
+            "max_length": 0,
+            "max_value": 0,
+            "options": "Customer",
+            "read_only": 0,
+            "reqd": 1,
+            "show_in_filter": 0
+        },
+        {
+            "allow_read_on_all_link_options": 0,
+            "fieldname": "delivery_date",
+            "fieldtype": "Date",
+            "hidden": 0,
+            "label": "Requested Delivery Date",
+            "max_length": 0,
+            "max_value": 0,
+            "read_only": 0,
+            "reqd": 1,
+            "show_in_filter": 0
+        },
+        {
+            "allow_read_on_all_link_options": 0,
+            "fieldname": "items",
+            "fieldtype": "Table",
+            "hidden": 0,
+            "label": "Order Items",
+            "max_length": 0,
+            "max_value": 0,
+            "options": "Sales Order Item",
+            "read_only": 0,
+            "reqd": 1,
+            "show_in_filter": 0
+        }
+    ]
 }
