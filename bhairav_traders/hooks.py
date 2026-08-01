@@ -5,7 +5,7 @@ app_description = "Customizations for Bhairav Traders"
 app_email = "admin@bhairavtraders.com "
 app_license = "mit"
 app_logo_url = "/assets/bhairav_traders/logo.png"
-
+brand_html = '<div class="d-flex align-items-center"><img src="/assets/bhairav_traders/logo.png" style="height: 30px; margin-right: 10px;"><span style="font-weight: bold; vertical-align: middle;">Bhairav Traders</span></div>'
 
 # Apps
 # ------------------

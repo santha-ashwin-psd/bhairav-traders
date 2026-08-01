@@ -39,14 +39,23 @@ def _ensure_portal_user_linked(user_email, customer):
 def _check_doc_customer_permission(doctype, doc):
     if frappe.session.user == "Administrator":
         return True
+        
     customer = get_current_customer()
     if not customer:
+        # Fallback for internal users who might use the portal (e.g., Salesman)
+        if frappe.has_permission(doctype, "read"):
+            return True
         return False
+        
     docname = doc if isinstance(doc, str) else getattr(doc, "name", None)
     if docname:
         doc_customer = frappe.db.get_value(doctype, docname, "customer")
+        if not doc_customer and docname.startswith("new-"):
+            return True
     else:
         doc_customer = getattr(doc, "customer", None)
+        if not doc_customer and getattr(doc, "is_new", lambda: False)():
+            return True
 
     return doc_customer == customer
 
@@ -59,20 +68,47 @@ def has_sales_invoice_website_permission(doc, ptype, user, verbose=False):
 def has_customer_support_request_website_permission(doc, ptype, user, verbose=False):
     return _check_doc_customer_permission("Customer Support Request", doc)
 
-def has_sales_order_permission(doc, ptype="read", user=None):
+def has_sales_order_permission(doc=None, ptype="read", user=None):
     """Desk & Web Form permission hook. Grant if it's the customer's own order, otherwise fallback to standard permissions."""
+    # Allow permission for temporary/new docnames (e.g. web form initialization)
+    if isinstance(doc, str) and doc.startswith("new-"):
+        return True
+
+    # Handle dict (new unsaved doc passed by run_doc_method)
+    if isinstance(doc, dict):
+        docname = doc.get("name", "") or ""
+        if docname.startswith("new-") or not docname:
+            return True
+
     customer = get_current_customer()
     if customer:
-        docname = doc if isinstance(doc, str) else getattr(doc, "name", None)
-        if docname:
-            doc_customer = frappe.db.get_value("Sales Order", docname, "customer")
+        if not doc:
+            return True
+
+        if isinstance(doc, str):
+            doc_customer = frappe.db.get_value("Sales Order", doc, "customer")
+        elif isinstance(doc, dict):
+            doc_customer = doc.get("customer")
         else:
             doc_customer = getattr(doc, "customer", None)
-            
+
         if doc_customer == customer:
             return True
-            
-    return None
+
+        # New document without customer set yet
+        docname = (doc if isinstance(doc, str) else (doc.get("name") if isinstance(doc, dict) else getattr(doc, "name", ""))) or ""
+        if not doc_customer and (docname.startswith("new-") or not docname):
+            return True
+
+        # Customer portal user trying to access another customer's order - deny
+        return False
+
+    # Not a customer portal user (e.g., Salesman, internal user) -
+    # return True to defer to standard role-based permission checks.
+    # Returning None/False here would block the standard checks via
+    # has_controller_permissions, causing spurious 403s for internal users
+    # calling run_doc_method and other API endpoints.
+    return True
 
 
 @frappe.whitelist()

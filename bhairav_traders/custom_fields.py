@@ -79,7 +79,7 @@ def sync_portal_web_forms():
     bypasses has_website_permission hooks and only checks role-based DocPerms,
     which causes 403 for Customer portal users who rely on those hooks.
     """
-    web_forms = ["customer-pending-approvals", "customer-invoice"]
+    web_forms = ["customer-order", "customer-pending-approvals", "customer-invoice"]
     for wf_name in web_forms:
         if frappe.db.exists("Web Form", wf_name):
             try:
