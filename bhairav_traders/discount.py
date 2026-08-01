@@ -55,7 +55,6 @@ def create_early_payment_credit_note(invoice, payment_entry_name, discount_pct, 
     try:
         cn = frappe.new_doc("Sales Invoice")
         cn.is_return = 1
-        cn.return_against = invoice.name
         cn.customer = invoice.customer
         cn.company = invoice.company
         cn.posting_date = invoice.posting_date

@@ -42,10 +42,8 @@ def _check_doc_customer_permission(doctype, doc):
         
     customer = get_current_customer()
     if not customer:
-        # Fallback for internal users who might use the portal (e.g., Salesman)
-        if frappe.has_permission(doctype, "read"):
-            return True
-        return False
+        # Not a portal customer - defer to standard role-based permissions
+        return True
         
     docname = doc if isinstance(doc, str) else getattr(doc, "name", None)
     if docname:

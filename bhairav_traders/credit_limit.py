@@ -227,3 +227,22 @@ def after_insert_sales_order(doc, method=None):
         frappe.db.set_value("Sales Order", doc.name, "workflow_state", "Pending Customer Approval")
     else:
         frappe.db.set_value("Sales Order", doc.name, "workflow_state", "To Be Processed")
+def sales_invoice_on_submit(doc, method=None):
+    """
+    Called on_submit of Sales Invoice.
+    Automatically marks linked Sales Orders as 'Completed' in the Workflow
+    if they are 100% billed.
+    """
+    if not doc.items:
+        return
+        
+    so_names = set(item.sales_order for item in doc.items if getattr(item, "sales_order", None))
+    
+    for so_name in so_names:
+        per_billed = frappe.db.get_value("Sales Order", so_name, "per_billed") or 0
+        if flt(per_billed) >= 100.0:
+            current_state = frappe.db.get_value("Sales Order", so_name, "workflow_state")
+            if current_state != "Completed":
+                frappe.db.set_value("Sales Order", so_name, "workflow_state", "Completed")
+                so_doc = frappe.get_doc("Sales Order", so_name)
+                so_doc.add_comment("Comment", text=f"Workflow state automatically marked as Completed because Sales Invoice {doc.name} fulfilled 100% billing.")

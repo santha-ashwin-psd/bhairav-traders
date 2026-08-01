@@ -10,7 +10,7 @@ brand_html = '<div class="d-flex align-items-center"><img src="/assets/bhairav_t
 # Apps
 # ------------------
 
-# required_apps = []
+# required_apps = []	
 
 add_to_apps_screen = [
 	{
@@ -163,7 +163,8 @@ doc_events = {
 	},
 	"Sales Invoice": {
 		"validate": "bhairav_traders.credit_limit.validate_sales_invoice_locking",
-		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment"
+		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment",
+		"on_submit": "bhairav_traders.credit_limit.sales_invoice_on_submit"
 	},
 	"Delivery Note": {
 		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment"
@@ -191,9 +192,9 @@ scheduler_events = {
 # ------------------------------
 #
 # Specify custom mixins to extend the standard doctype controller.
-# extend_doctype_class = {
-# 	"Task": "bhairav_traders.custom.task.CustomTaskMixin"
-# }
+extend_doctype_class = {
+	"Sales Order": "bhairav_traders.utils.sales_order_mixin.SalesOrderPortalMixin"
+}
 
 # Overriding Methods
 # ------------------------------
