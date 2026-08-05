@@ -92,7 +92,7 @@ def validate_sales_order_credit(doc, method=None):
     is_locked = check_account_lock_status(doc.customer)
     customer_doc = frappe.get_doc("Customer", doc.customer)
     
-    if is_locked:
+    if is_locked and doc.is_new():
         frappe.throw(
             _("Customer account '{0}' is locked due to overdue payments. Reason: {1}").format(
                 doc.customer, customer_doc.lock_reason
@@ -123,7 +123,7 @@ def validate_sales_order_credit(doc, method=None):
         grand_total = flt(doc.grand_total)
         total_exposure = flt(total_outstanding) + grand_total
         
-        if total_exposure > credit_limit:
+        if total_exposure > credit_limit and doc.is_new():
             frappe.throw(
                 _("Credit Limit Exceeded for '{0}'. Credit Limit: ₹{1:,.2f}, Outstanding + New Order: ₹{2:,.2f}").format(
                     doc.customer, credit_limit, total_exposure
@@ -138,6 +138,9 @@ def validate_sales_invoice_locking(doc, method=None):
     2. Invoicing for locked accounts is blocked unless approved_during_lock is checked by Accounts Manager/Director.
     """
     if not doc.customer:
+        return
+        
+    if getattr(doc, "is_return", 0):
         return
         
     # Check linked Sales Orders for customer approval
@@ -246,3 +249,43 @@ def sales_invoice_on_submit(doc, method=None):
                 frappe.db.set_value("Sales Order", so_name, "workflow_state", "Completed")
                 so_doc = frappe.get_doc("Sales Order", so_name)
                 so_doc.add_comment("Comment", text=f"Workflow state automatically marked as Completed because Sales Invoice {doc.name} fulfilled 100% billing.")
+
+def set_permissions():
+    """Run via bench execute bhairav_traders.credit_limit.set_permissions"""
+    import frappe
+    # For Sales Order
+    doctype = "Sales Order"
+    roles = ["Accounts Manager", "Accounts User"]
+    
+    for role in roles:
+        # Check if permission exists
+        perm = frappe.db.get_value("Custom DocPerm", {"parent": doctype, "role": role})
+        if not perm:
+            doc = frappe.get_doc({
+                "doctype": "Custom DocPerm",
+                "parent": doctype,
+                "parenttype": "DocType",
+                "parentfield": "permissions",
+                "role": role,
+                "read": 1,
+                "write": 0,
+                "create": 0,
+                "submit": 1,
+                "cancel": 1,
+                "amend": 1
+            })
+            doc.insert(ignore_permissions=True)
+            print(f"Added Custom DocPerm for {role} on {doctype}")
+        else:
+            frappe.db.set_value("Custom DocPerm", perm, {
+                "read": 1,
+                "write": 0,
+                "create": 0,
+                "submit": 1,
+                "cancel": 1,
+                "amend": 1
+            })
+            print(f"Updated Custom DocPerm for {role} on {doctype}")
+    
+    frappe.clear_cache(doctype=doctype)
+    print("Permissions updated successfully!")

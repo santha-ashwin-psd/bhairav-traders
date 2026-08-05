@@ -61,6 +61,7 @@ def setup_custom_fields():
                 "label": "Approved Invoicing During Account Lock",
                 "fieldtype": "Check",
                 "insert_after": "due_date",
+                "permlevel": 1,
                 "description": "Allowed for Finance Manager / Director to authorize invoicing for locked accounts."
             }
         ]

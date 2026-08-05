@@ -53,26 +53,25 @@ def create_early_payment_credit_note(invoice, payment_entry_name, discount_pct, 
     Creates and submits a Credit Note (Sales Invoice return or Standalone Credit Note) for early payment discount.
     """
     try:
-        cn = frappe.new_doc("Sales Invoice")
-        cn.is_return = 1
-        cn.customer = invoice.customer
-        cn.company = invoice.company
+        from erpnext.controllers.sales_and_purchase_return import make_return_doc
+        
+        # Create a proper return document linked to the original invoice
+        cn = make_return_doc("Sales Invoice", invoice.name)
         cn.posting_date = invoice.posting_date
-        cn.currency = invoice.currency
+        cn.update_outstanding_for_self = 0
         cn.remarks = f"Early Payment Discount of {discount_pct}% for invoice {invoice.name} paid within {days_taken} days (Payment Entry: {payment_entry_name})"
         
-        # Add item for discount
-        item_code = invoice.items[0].item_code if invoice.items else None
+        # Keep only the first item (to maintain the internal link) and delete the rest
+        first_item = cn.items[0]
+        cn.set("items", [first_item])
         
-        cn.append("items", {
-            "item_code": item_code,
-            "qty": -1,
-            "rate": discount_amount,
-            "amount": -discount_amount,
-            "description": f"Early Payment Discount ({discount_pct}%)"
-        })
+        # Modify this existing item to be our discount line
+        first_item.qty = -1.0
+        first_item.rate = discount_amount
+        first_item.amount = -discount_amount
+        first_item.description = f"Early Payment Discount ({discount_pct}%)"
         
-        frappe.flags.ignore_permissions = True
+        cn.flags.ignore_permissions = True
         cn.insert(ignore_permissions=True)
         cn.submit()
         
