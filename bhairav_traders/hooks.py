@@ -173,6 +173,10 @@ doc_events = {
 	},
 	"Payment Entry": {
 		"on_submit": "bhairav_traders.discount.payment_entry_on_submit"
+	},
+	"Sales Person": {
+		"before_validate": "bhairav_traders.utils.sales_person.before_validate_sales_person",
+		"validate": "bhairav_traders.utils.sales_person.validate_sales_person"
 	}
 }
 

@@ -64,6 +64,16 @@ def setup_custom_fields():
                 "permlevel": 1,
                 "description": "Allowed for Finance Manager / Director to authorize invoicing for locked accounts."
             }
+        ],
+        "Sales Person": [
+            {
+                "fieldname": "user",
+                "label": "User",
+                "fieldtype": "Link",
+                "options": "User",
+                "insert_after": "sales_person_name",
+                "description": "Link this Sales Person to a system user login."
+            }
         ]
     }
     
