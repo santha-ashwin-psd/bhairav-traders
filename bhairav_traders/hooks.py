@@ -47,6 +47,7 @@ has_website_permission = {
 	"Sales Order": "bhairav_traders.portal_utils.has_sales_order_website_permission",
 	"Sales Invoice": "bhairav_traders.portal_utils.has_sales_invoice_website_permission",
 	"Customer Support Request": "bhairav_traders.portal_utils.has_customer_support_request_website_permission",
+	"Customer Ledger": "bhairav_traders.portal_utils.has_customer_ledger_website_permission",
 }
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "bhairav_traders/public/scss/website"
@@ -177,6 +178,11 @@ doc_events = {
 	"Sales Person": {
 		"before_validate": "bhairav_traders.utils.sales_person.before_validate_sales_person",
 		"validate": "bhairav_traders.utils.sales_person.validate_sales_person"
+	},
+	"GL Entry": {
+		"before_insert": "bhairav_traders.utils.gl_entry_sync.gl_entry_before_insert",
+		"after_insert": "bhairav_traders.utils.gl_entry_sync.on_gl_entry_insert",
+		"on_trash": "bhairav_traders.utils.gl_entry_sync.on_gl_entry_trash"
 	}
 }
 

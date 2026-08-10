@@ -10,6 +10,11 @@ def get_current_balance(customer):
 	
 	return result[0][0] if result and result[0][0] else 0.0
 
+def gl_entry_before_insert(doc, method):
+	from frappe.model.naming import set_name_from_naming_options
+	set_name_from_naming_options(doc.meta.autoname, doc)
+	doc.to_rename = 0
+
 def on_gl_entry_insert(doc, method):
 	if doc.party_type == "Customer" and doc.party:
 		# Get previous balance

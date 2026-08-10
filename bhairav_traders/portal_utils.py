@@ -226,3 +226,5 @@ def reject_customer_order(order_name, reason):
     doc.add_comment("Comment", text=f"Rejected by customer. Reason: {reason}")
     # add_comment saves the comment to the Communication table, no need to save the SO doc itself.
     return "Success"
+def has_customer_ledger_website_permission(doc, ptype, user, verbose=False):
+    return _check_doc_customer_permission("Customer Ledger", doc)
