@@ -17,7 +17,8 @@
   "debit",
   "credit",
   "balance",
-  "remarks"
+  "remarks",
+  "gl_entry"
  ],
  "fields": [
   {
@@ -94,6 +95,13 @@
    "fieldname": "remarks",
    "fieldtype": "Small Text",
    "label": "Remarks"
+  },
+  {
+   "fieldname": "gl_entry",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "GL Entry",
+   "options": "GL Entry"
   }
  ],
  "index_web_pages_for_search": 1,

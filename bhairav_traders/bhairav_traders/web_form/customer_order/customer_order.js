@@ -17,6 +17,15 @@ frappe.ready(function () {
             if (r.message && r.message.customer) {
                 frappe.web_form.set_value('customer', r.message.customer);
                 customer_name = r.message.customer_name || r.message.customer;
+                
+                setTimeout(() => {
+                    let field = frappe.web_form.get_field('customer');
+                    if (field) {
+                        if (field.set_read_only) field.set_read_only(true);
+                        if (field.$input) field.$input.prop('readonly', true);
+                        if (field.$wrapper) field.$wrapper.find('.link-btn').remove();
+                    }
+                }, 100);
             }
         }
     });

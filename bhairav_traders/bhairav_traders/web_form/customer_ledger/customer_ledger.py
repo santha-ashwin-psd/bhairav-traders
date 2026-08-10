@@ -9,6 +9,7 @@ def get_context(context):
 
 def get_list_context(context):
     update_website_context(context)
+    context.no_cache = 1
     context.get_list = get_customer_ledger_entries
 
 def get_customer_ledger_entries(doctype, txt=None, filters=None, limit_start=0, limit_page_length=20, order_by="creation desc", **kwargs):
@@ -17,30 +18,17 @@ def get_customer_ledger_entries(doctype, txt=None, filters=None, limit_start=0, 
     if not customer:
         return []
         
-    entries = frappe.db.sql("""
-        SELECT
-            name,
-            posting_date,
-            voucher_type,
-            voucher_no,
-            debit,
-            credit,
-            against
-        FROM `tabGL Entry`
-        WHERE party_type = 'Customer' AND party = %s AND is_cancelled = 0
-        ORDER BY posting_date ASC, creation ASC
-    """, (customer,), as_dict=True)
+    entries = frappe.get_all(
+        "Customer Ledger",
+        filters={"customer": customer},
+        fields=["name", "posting_date", "voucher_type", "voucher_no", "debit", "credit", "against", "balance"],
+        order_by="posting_date desc, creation desc",
+        limit_start=limit_start,
+        limit_page_length=limit_page_length,
+        ignore_permissions=True
+    )
     
-    balance = 0.0
-    for entry in entries:
-        balance += (flt(entry.debit) - flt(entry.credit))
-        entry.balance = balance
-        
-    entries.reverse()
-    
-    start = int(limit_start or 0)
-    page = int(limit_page_length or 20)
-    return entries[start:start+page]
+    return entries
 
 def flt(val):
     try:

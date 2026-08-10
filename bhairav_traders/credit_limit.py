@@ -87,6 +87,14 @@ def validate_sales_order_credit(doc, method=None):
         doc.placed_by_salesman = 1
         if not doc.customer_approval_status or doc.customer_approval_status == "Not Required":
             doc.customer_approval_status = "Pending"
+            
+    # Prevent manual modification of these fields by non-admins
+    if not doc.is_new():
+        old_doc = doc.get_doc_before_save()
+        if old_doc:
+            if old_doc.placed_by_salesman != doc.placed_by_salesman or old_doc.customer_approval_status != doc.customer_approval_status:
+                if frappe.session.user != "Administrator" and "System Manager" not in frappe.get_roles(frappe.session.user):
+                    frappe.throw(_("Only Administrators or the Customer (via portal) can modify 'Placed By Salesman' or 'Customer Approval Status'."))
 
     # Check and update account lock status
     is_locked = check_account_lock_status(doc.customer)
