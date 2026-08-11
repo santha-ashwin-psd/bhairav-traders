@@ -67,14 +67,28 @@ def get_context(context):
     })
 
     # Fetch recent orders (last 5)
-    context.recent_orders = frappe.get_all(
+    recent_orders = frappe.get_all(
         "Sales Order",
         filters={"customer": customer},
-        fields=["name", "transaction_date", "grand_total", "status", "customer_approval_status"],
+        fields=["name", "transaction_date", "grand_total", "status", "customer_approval_status", "per_billed"],
         order_by="creation desc",
         limit=5,
         ignore_permissions=True
     )
+    
+    for order in recent_orders:
+        if order.per_billed and order.per_billed >= 100:
+            outstanding = frappe.db.sql("""
+                SELECT SUM(outstanding_amount) 
+                FROM `tabSales Invoice` 
+                WHERE name IN (SELECT parent FROM `tabSales Invoice Item` WHERE sales_order = %s) 
+                AND docstatus = 1
+            """, order.name)
+            
+            if outstanding and outstanding[0][0] is not None and outstanding[0][0] <= 0:
+                order.status = "Completed"
+            
+    context.recent_orders = recent_orders
 
     # Fetch recent invoices (last 5)
     context.recent_invoices = frappe.get_all(

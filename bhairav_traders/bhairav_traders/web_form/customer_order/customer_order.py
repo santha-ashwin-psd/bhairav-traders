@@ -28,12 +28,26 @@ def get_customer_orders(doctype, txt=None, filters=None, limit_start=0, limit_pa
     if not customer:
         return []
         
-    return frappe.get_all(
+    orders = frappe.get_all(
         "Sales Order",
         filters={"customer": customer},
-        fields=["name", "transaction_date", "grand_total", "status", "customer_approval_status"],
+        fields=["name", "transaction_date", "grand_total", "status", "customer_approval_status", "per_billed"],
         order_by="creation desc",
         limit_start=limit_start,
         limit_page_length=limit_page_length,
         ignore_permissions=True
     )
+    
+    for order in orders:
+        if order.per_billed and order.per_billed >= 100:
+            outstanding = frappe.db.sql("""
+                SELECT SUM(outstanding_amount) 
+                FROM `tabSales Invoice` 
+                WHERE name IN (SELECT parent FROM `tabSales Invoice Item` WHERE sales_order = %s) 
+                AND docstatus = 1
+            """, order.name)
+            
+            if outstanding and outstanding[0][0] is not None and outstanding[0][0] <= 0:
+                order.status = "Completed"
+            
+    return orders
