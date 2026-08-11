@@ -10,9 +10,34 @@ def get_current_balance(customer):
 	
 	return result[0][0] if result and result[0][0] else 0.0
 
-def gl_entry_before_insert(doc, method):
+def gl_entry_autoname(doc, method):
 	from frappe.model.naming import set_name_from_naming_options
-	set_name_from_naming_options(doc.meta.autoname, doc)
+	
+	autoname = doc.meta.autoname
+	if autoname and doc.get("posting_date"):
+		try:
+			date_obj = doc.posting_date
+			if hasattr(date_obj, "strftime"):
+				year = date_obj.strftime("%Y")
+				short_year = date_obj.strftime("%y")
+				month = date_obj.strftime("%m")
+				day = date_obj.strftime("%d")
+			else:
+				# string "YYYY-MM-DD"
+				date_str = str(date_obj)
+				year = date_str[:4]
+				short_year = date_str[2:4]
+				month = date_str[5:7]
+				day = date_str[8:10]
+			
+			autoname = autoname.replace(".YYYY.", f".{year}.")
+			autoname = autoname.replace(".YY.", f".{short_year}.")
+			autoname = autoname.replace(".MM.", f".{month}.")
+			autoname = autoname.replace(".DD.", f".{day}.")
+		except Exception:
+			pass
+		
+	set_name_from_naming_options(autoname, doc)
 	doc.to_rename = 0
 
 def on_gl_entry_insert(doc, method):

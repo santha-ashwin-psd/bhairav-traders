@@ -180,7 +180,7 @@ doc_events = {
 		"validate": "bhairav_traders.utils.sales_person.validate_sales_person"
 	},
 	"GL Entry": {
-		"before_insert": "bhairav_traders.utils.gl_entry_sync.gl_entry_before_insert",
+		"autoname": "bhairav_traders.utils.gl_entry_sync.gl_entry_autoname",
 		"after_insert": "bhairav_traders.utils.gl_entry_sync.on_gl_entry_insert",
 		"on_trash": "bhairav_traders.utils.gl_entry_sync.on_gl_entry_trash"
 	}
