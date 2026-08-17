@@ -26,6 +26,65 @@ def setup_custom_fields():
                 "fieldtype": "Small Text",
                 "read_only": 1,
                 "insert_after": "is_account_locked"
+            },
+            {
+                "fieldname": "customer_tier",
+                "label": "Customer Tier",
+                "fieldtype": "Select",
+                "options": "\nTier 1\nTier 2\nTier 3",
+                "insert_after": "customer_group"
+            },
+            {
+                "fieldname": "dealer_code",
+                "label": "Dealer Code",
+                "fieldtype": "Data",
+                "insert_after": "customer_tier"
+            },
+            {
+                "fieldname": "distributor_code",
+                "label": "Distributor Code",
+                "fieldtype": "Data",
+                "insert_after": "dealer_code"
+            },
+            {
+                "fieldname": "security_deposit",
+                "label": "Security Deposit",
+                "fieldtype": "Currency",
+                "insert_after": "credit_limits"
+            },
+            {
+                "fieldname": "msme_status",
+                "label": "MSME Status",
+                "fieldtype": "Select",
+                "options": "\nYes\nNo\nApplied",
+                "insert_after": "tax_id"
+            },
+            {
+                "fieldname": "transport_preference",
+                "label": "Transport Preference",
+                "fieldtype": "Link",
+                "options": "Supplier",
+                "description": "Select the preferred transporter (Transporters should be added as Suppliers)",
+                "insert_after": "primary_address"
+            },
+            {
+                "fieldname": "commission_scheme",
+                "label": "Commission Scheme",
+                "fieldtype": "Data",
+                "insert_after": "default_commission_rate"
+            },
+            {
+                "fieldname": "dealer_discount_scheme",
+                "label": "Dealer Discount Scheme",
+                "fieldtype": "Data",
+                "insert_after": "commission_scheme"
+            },
+            {
+                "fieldname": "collection_responsibility",
+                "label": "Collection Responsibility",
+                "fieldtype": "Link",
+                "options": "Employee",
+                "insert_after": "account_manager"
             }
         ],
         "Sales Order": [
@@ -75,6 +134,14 @@ def setup_custom_fields():
                 "options": "User",
                 "insert_after": "sales_person_name",
                 "description": "Link this Sales Person to a system user login."
+            }
+        ],
+        "Item": [
+            {
+                "fieldname": "model",
+                "label": "Model",
+                "fieldtype": "Data",
+                "insert_after": "brand"
             }
         ]
     }
