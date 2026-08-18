@@ -105,7 +105,10 @@ has_website_permission = {
 
 # before_install = "bhairav_traders.install.before_install"
 after_install = "bhairav_traders.install.after_install"
-after_migrate = "bhairav_traders.custom_fields.setup_custom_fields"
+after_migrate = [
+	"bhairav_traders.custom_fields.setup_custom_fields",
+	"bhairav_traders.setup_role_permissions.setup"
+]
 
 # Uninstallation
 # ------------
@@ -283,3 +286,10 @@ extend_doctype_class = {
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
+
+fixtures = [
+    "Role",
+    "Custom Field",
+    "Property Setter",
+    "Custom DocPerm"
+]
