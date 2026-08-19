@@ -293,9 +293,9 @@ fixtures = [
     "Custom Field",
     "Property Setter",
     "Custom DocPerm",
-    {"dt": "Workspace", "filters": [["name", "like", "AEPL%"]]},
-    {"dt": "Number Card", "filters": [["name", "like", "AEPL%"]]},
-    {"dt": "Dashboard Chart", "filters": [["chart_name", "like", "AEPL%"]]},
+    {"dt": "Workspace", "filters": [["name", "like", "Atulya%"]]},
+    {"dt": "Number Card", "filters": [["name", "like", "Atulya%"]]},
+    {"dt": "Dashboard Chart", "filters": [["chart_name", "like", "Atulya%"]]},
     {"dt": "Workflow", "filters": [["name", "like", "Atulya%"]]},
     "Workflow State",
     "Workflow Action Master"
