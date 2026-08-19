@@ -1,0 +1,200 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "question-sign",
+  "modified": "2026-07-23 11:53:26.340271",
+  "name": "Pending",
+  "style": "",
+  "workflow_state_name": "Pending"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2026-08-18 15:19:04.860847",
+  "name": "Approved",
+  "style": "Success",
+  "workflow_state_name": "Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "remove",
+  "modified": "2026-08-18 15:19:04.865949",
+  "name": "Rejected",
+  "style": "Danger",
+  "workflow_state_name": "Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-18 15:19:04.870179",
+  "name": "Customer Approved",
+  "style": "Success",
+  "workflow_state_name": "Customer Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-29 11:21:04.424591",
+  "name": "Customer Rejected",
+  "style": "Danger",
+  "workflow_state_name": "Customer Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-29 11:22:35.348389",
+  "name": "Invoiced",
+  "style": "Success",
+  "workflow_state_name": "Invoiced"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-18 15:19:04.842930",
+  "name": "Pending Sales Manager",
+  "style": "Warning",
+  "workflow_state_name": "Pending Sales Manager"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:08:25.128955",
+  "name": "Pending Sales Head",
+  "style": "Warning",
+  "workflow_state_name": "Pending Sales Head"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-18 15:19:04.850524",
+  "name": "Pending Director",
+  "style": "Warning",
+  "workflow_state_name": "Pending Director"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:08:25.137831",
+  "name": "Pending Customer Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Customer Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-18 15:19:04.877121",
+  "name": "Completed",
+  "style": "Success",
+  "workflow_state_name": "Completed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "check",
+  "modified": "2026-08-18 15:19:04.873694",
+  "name": "Ready for Invoicing",
+  "style": "Primary",
+  "workflow_state_name": "Ready for Invoicing"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-18 15:19:04.839352",
+  "name": "Draft",
+  "style": "",
+  "workflow_state_name": "Draft"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-18 15:19:04.880677",
+  "name": "To Be Processed",
+  "style": "Primary",
+  "workflow_state_name": "To Be Processed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:08:25.132381",
+  "name": "Pending Regional Manager",
+  "style": "Warning",
+  "workflow_state_name": "Pending Regional Manager"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:08:25.125577",
+  "name": "Pending Head Sales",
+  "style": "Warning",
+  "workflow_state_name": "Pending Head Sales"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:08:25.121095",
+  "name": "Pending Commercial Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Commercial Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:16:15.415646",
+  "name": "Pending QC Verification",
+  "style": "Warning",
+  "workflow_state_name": "Pending QC Verification"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:16:15.453006",
+  "name": "Approved & Dispatched",
+  "style": "Success",
+  "workflow_state_name": "Approved & Dispatched"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:22:35.676096",
+  "name": "Return Requested",
+  "style": "Primary",
+  "workflow_state_name": "Return Requested"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:22:35.689171",
+  "name": "Pending Accounts Verification",
+  "style": "Warning",
+  "workflow_state_name": "Pending Accounts Verification"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:22:35.696336",
+  "name": "Return Approved",
+  "style": "Success",
+  "workflow_state_name": "Return Approved"
+ }
+]

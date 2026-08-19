@@ -81,7 +81,7 @@
                     </svg>
                 </div>
                 <span class="kpi-label text-muted text-xs uppercase font-weight-bold">Outstanding Balance</span>
-                <h3 class="kpi-value value-outstanding font-weight-bold mt-1 mb-0">₹{{ "{:,.2f}".format(outstanding_balance) }}</h3>
+                <h3 class="kpi-value value-outstanding font-weight-bold mt-1 mb-0">₹{{ frappe.utils.fmt_money(outstanding_balance) }}</h3>
                 <p class="kpi-subtext text-muted text-xs mt-2 mb-0">Total unpaid posted invoices</p>
             </div>
         </div>
@@ -99,7 +99,7 @@
                 <span class="kpi-label text-muted text-xs uppercase font-weight-bold">Available Credit</span>
                 <h3 class="kpi-value value-remaining-credit font-weight-bold mt-1 mb-0">
                     {% if credit_limit > 0 %}
-                    ₹{{ "{:,.2f}".format(remaining_credit) }}
+                    ₹{{ frappe.utils.fmt_money(remaining_credit) }}
                     {% else %}
                     ₹0.00
                     {% endif %}
@@ -196,7 +196,7 @@
                             <span class="activity-item-date">{{ order.transaction_date }}</span>
                         </div>
                         <div class="activity-item-details">
-                            <span class="activity-item-value">₹{{ "{:,.2f}".format(order.grand_total) }}</span>
+                            <span class="activity-item-value">₹{{ frappe.utils.fmt_money(order.grand_total) }}</span>
                             <div class="activity-item-badges">
                                 {% if order.status == 'Completed' %}
                                 <span class="badge-pill-status badge-success-light">{{ order.status }}</span>
@@ -241,10 +241,10 @@
                             <span class="activity-item-date">{{ invoice.posting_date }}</span>
                         </div>
                         <div class="activity-item-details">
-                            <span class="activity-item-value">₹{{ "{:,.2f}".format(invoice.grand_total) }}</span>
+                            <span class="activity-item-value">₹{{ frappe.utils.fmt_money(invoice.grand_total) }}</span>
                             <div class="activity-item-badges">
                                 {% if invoice.outstanding_amount > 0 %}
-                                <span class="activity-item-outstanding">Outstanding: ₹{{ "{:,.2f}".format(invoice.outstanding_amount) }}</span>
+                                <span class="activity-item-outstanding">Outstanding: ₹{{ frappe.utils.fmt_money(invoice.outstanding_amount) }}</span>
                                 {% endif %}
 
                                 {% if invoice.status == 'Paid' %}

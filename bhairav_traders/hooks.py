@@ -1,11 +1,11 @@
 app_name = "bhairav_traders"
-app_title = "Bhairav Traders"
-app_publisher = "Bhairav Traders"
-app_description = "Customizations for Bhairav Traders"
-app_email = "admin@bhairavtraders.com "
+app_title = "ATULYA"
+app_publisher = "ATULYA"
+app_description = "Customizations for ATULYA"
+app_email = "admin@atulya.com"
 app_license = "mit"
 app_logo_url = "/assets/bhairav_traders/logo.png"
-brand_html = '<div class="d-flex align-items-center"><img src="/assets/bhairav_traders/logo.png" style="height: 40px; margin-right: 10px;"><span style="font-weight: bold; font-size: 1.25rem; vertical-align: middle;">Bhairav Traders</span></div>'
+brand_html = '<div class="d-flex align-items-center"><img src="/assets/bhairav_traders/logo.png" style="height: 40px; margin-right: 10px;"><span style="font-weight: bold; font-size: 1.25rem; vertical-align: middle;">ATULYA</span></div>'
 
 # Apps
 # ------------------
@@ -16,7 +16,7 @@ add_to_apps_screen = [
 	{
 		"name": "bhairav_traders",
 		"logo": "/assets/bhairav_traders/logo.png",
-		"title": "Bhairav Traders",
+		"title": "ATULYA",
 		"route": "/portal"
 	}
 ]
@@ -105,10 +105,6 @@ has_website_permission = {
 
 # before_install = "bhairav_traders.install.before_install"
 after_install = "bhairav_traders.install.after_install"
-after_migrate = [
-	"bhairav_traders.custom_fields.setup_custom_fields",
-	"bhairav_traders.setup_role_permissions.setup"
-]
 
 # Uninstallation
 # ------------
@@ -162,18 +158,23 @@ has_permission = {
 
 doc_events = {
 	"Sales Order": {
-		"validate": "bhairav_traders.credit_limit.validate_sales_order_credit",
+		"validate": [
+			"bhairav_traders.credit_limit.validate_sales_order_credit",
+			"bhairav_traders.utils.dealer_scheme.apply_dealer_scheme_discount"
+		],
 		"after_insert": "bhairav_traders.credit_limit.after_insert_sales_order"
 	},
 	"Sales Invoice": {
 		"before_submit": [
 			"bhairav_traders.credit_limit.validate_sales_invoice_locking",
-			"bhairav_traders.credit_limit.validate_advance_payment"
+			"bhairav_traders.credit_limit.validate_advance_payment",
+			"bhairav_traders.utils.invoicing.validate_eway_bill"
 		],
 		"on_submit": "bhairav_traders.credit_limit.sales_invoice_on_submit"
 	},
 	"Delivery Note": {
-		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment"
+		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment",
+		"before_save": "bhairav_traders.utils.logistics.delivery_note_before_save"
 	},
 	"Payment Entry": {
 		"on_submit": "bhairav_traders.discount.payment_entry_on_submit"
@@ -291,5 +292,11 @@ fixtures = [
     "Role",
     "Custom Field",
     "Property Setter",
-    "Custom DocPerm"
+    "Custom DocPerm",
+    {"dt": "Workspace", "filters": [["name", "like", "AEPL%"]]},
+    {"dt": "Number Card", "filters": [["name", "like", "AEPL%"]]},
+    {"dt": "Dashboard Chart", "filters": [["chart_name", "like", "AEPL%"]]},
+    {"dt": "Workflow", "filters": [["name", "like", "Atulya%"]]},
+    "Workflow State",
+    "Workflow Action Master"
 ]

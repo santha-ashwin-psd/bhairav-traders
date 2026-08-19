@@ -1,4 +1,5 @@
 import frappe
+import frappe.model.workflow
 
 def get_current_customer():
     if frappe.session.user == "Guest":
@@ -198,10 +199,14 @@ def approve_customer_order(order_name):
     if doc.customer_approval_status != "Pending":
         frappe.throw("Order is not pending approval.")
         
-    frappe.db.set_value("Sales Order", order_name, {
-        "customer_approval_status": "Approved",
-        "workflow_state": "Customer Approved"
-    })
+    frappe.db.set_value("Sales Order", order_name, "customer_approval_status", "Approved")
+    original_user = frappe.session.user
+    frappe.set_user("Administrator")
+    try:
+        frappe.model.workflow.apply_workflow(doc, "Customer Approve")
+    finally:
+        frappe.set_user(original_user)
+        
     return "Success"
 
 @frappe.whitelist()
@@ -217,10 +222,12 @@ def reject_customer_order(order_name, reason):
     if doc.customer_approval_status != "Pending":
         frappe.throw("Order is not pending approval.")
         
-    frappe.db.set_value("Sales Order", order_name, {
-        "customer_approval_status": "Rejected",
-        "workflow_state": "Customer Rejected"
-    })
+    original_user = frappe.session.user
+    frappe.set_user("Administrator")
+    try:
+        frappe.model.workflow.apply_workflow(doc, "Customer Reject")
+    finally:
+        frappe.set_user(original_user)
     
     # We might want to store the reason in a custom field or comments, for now we add a comment
     doc.add_comment("Comment", text=f"Rejected by customer. Reason: {reason}")

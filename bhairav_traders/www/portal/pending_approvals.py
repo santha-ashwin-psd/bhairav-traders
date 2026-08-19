@@ -1,5 +1,6 @@
 import frappe
 from frappe import _
+import frappe.model.workflow
 
 login_required = 1
 
@@ -83,10 +84,14 @@ def approve_order(order_id):
 		frappe.throw(_("This order is no longer pending approval."))
 
 	# Update status and workflow state
-	doc.db_set("customer_approval_status", "Approved")
-	doc.db_set("workflow_state", "Customer Approved")
-	doc.add_comment("Comment", "Approved by customer via Portal.")
-
+	frappe.db.set_value("Sales Order", doc.name, "customer_approval_status", "Approved")
+	original_user = frappe.session.user
+	frappe.set_user("Administrator")
+	try:
+		frappe.model.workflow.apply_workflow(doc, "Customer Approve")
+	finally:
+		frappe.set_user(original_user)
+	
 	return {"status": "success", "message": f"Order {order_id} approved!"}
 
 
@@ -112,8 +117,11 @@ def reject_order(order_id, reason=""):
 		frappe.throw(_("This order is no longer pending approval."))
 
 	# Update status and workflow state
-	doc.db_set("customer_approval_status", "Rejected")
-	doc.db_set("workflow_state", "Customer Rejected")
-	doc.add_comment("Comment", f"Rejected by customer via Portal. Reason: {reason}")
+	original_user = frappe.session.user
+	frappe.set_user("Administrator")
+	try:
+		frappe.model.workflow.apply_workflow(doc, "Customer Reject")
+	finally:
+		frappe.set_user(original_user)
 
-	return {"status": "success", "message": f"Order {order_id} rejected."}
+	return {"status": "success", "message": f"Order {order_id} rejected!"}

@@ -93,19 +93,20 @@ def validate_sales_order_credit(doc, method=None):
         old_doc = doc.get_doc_before_save()
         if old_doc:
             if old_doc.placed_by_salesman != doc.placed_by_salesman or old_doc.customer_approval_status != doc.customer_approval_status:
-                if frappe.session.user != "Administrator" and "System Manager" not in frappe.get_roles(frappe.session.user):
+                roles = frappe.get_roles(frappe.session.user)
+                if frappe.session.user != "Administrator" and "System Manager" not in roles and "Customer" not in roles:
                     frappe.throw(_("Only Administrators or the Customer (via portal) can modify 'Placed By Salesman' or 'Customer Approval Status'."))
 
     # Check and update account lock status
     is_locked = check_account_lock_status(doc.customer)
     customer_doc = frappe.get_doc("Customer", doc.customer)
     
+    is_breached = False
+    breach_reason = []
+
     if is_locked and doc.is_new():
-        frappe.throw(
-            _("Customer account '{0}' is locked due to overdue payments. Reason: {1}").format(
-                doc.customer, customer_doc.lock_reason
-            )
-        )
+        is_breached = True
+        breach_reason.append(f"Account locked: {customer_doc.lock_reason}")
         
     # Check customer credit limits
     credit_limit = frappe.db.get_value(
@@ -132,11 +133,17 @@ def validate_sales_order_credit(doc, method=None):
         total_exposure = flt(total_outstanding) + grand_total
         
         if total_exposure > credit_limit and doc.is_new():
-            frappe.throw(
-                _("Credit Limit Exceeded for '{0}'. Credit Limit: ₹{1:,.2f}, Outstanding + New Order: ₹{2:,.2f}").format(
-                    doc.customer, credit_limit, total_exposure
-                )
-            )
+            is_breached = True
+            breach_reason.append(f"Limit: ₹{credit_limit:,.2f}, Total Exposure: ₹{total_exposure:,.2f}")
+
+    if getattr(doc, "is_new", lambda: False)():
+        if is_breached:
+            doc.credit_limit_breached = 1
+            doc.credit_breach_reason = " | ".join(breach_reason)[:140]
+            frappe.msgprint(_("Warning: Credit controls breached. This order will require Manager approval. Reason: {0}").format(doc.credit_breach_reason), alert=True)
+        else:
+            doc.credit_limit_breached = 0
+            doc.credit_breach_reason = ""
 
 
 def validate_sales_invoice_locking(doc, method=None):
@@ -227,17 +234,7 @@ def set_workflow_state(doc, state):
         doc.customer_approval_status = "Not Required"
 
 def after_insert_sales_order(doc, method=None):
-    """
-    Handle workflow jumps after the document is inserted in Draft state.
-    Frappe blocks setting workflow_state directly during creation (insert),
-    so we must bypass it immediately after insertion via set_value.
-    """
-    is_salesman = is_salesman_user(frappe.session.user)
-    
-    if is_salesman:
-        frappe.db.set_value("Sales Order", doc.name, "workflow_state", "Pending Customer Approval")
-    else:
-        frappe.db.set_value("Sales Order", doc.name, "workflow_state", "To Be Processed")
+    pass
 def sales_invoice_on_submit(doc, method=None):
     """
     Called on_submit of Sales Invoice.

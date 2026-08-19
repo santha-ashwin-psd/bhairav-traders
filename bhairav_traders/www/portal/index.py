@@ -83,7 +83,7 @@ def get_context(context):
                 FROM `tabSales Invoice` 
                 WHERE name IN (SELECT parent FROM `tabSales Invoice Item` WHERE sales_order = %s) 
                 AND docstatus = 1
-            """, order.name)
+            """, (order.name,))
             
             if outstanding and outstanding[0][0] is not None and outstanding[0][0] <= 0:
                 order.status = "Completed"

@@ -1,0 +1,114 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 11:53:26.386903",
+  "name": "Approve",
+  "workflow_action_name": "Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 11:53:26.392176",
+  "name": "Reject",
+  "workflow_action_name": "Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 11:53:26.395285",
+  "name": "Review",
+  "workflow_action_name": "Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-29 11:27:58.179896",
+  "name": "Create Invoice",
+  "workflow_action_name": "Create Invoice"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-29 11:28:31.522741",
+  "name": "Mark Complete",
+  "workflow_action_name": "Mark Complete"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-01 16:28:56.027209",
+  "name": "Approve for Invoicing",
+  "workflow_action_name": "Approve for Invoicing"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-18 13:21:19.709005",
+  "name": "Customer Approve",
+  "workflow_action_name": "Customer Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-18 13:21:19.718349",
+  "name": "Customer Reject",
+  "workflow_action_name": "Customer Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-29 11:03:14.266713",
+  "name": "Submit for approval",
+  "workflow_action_name": "Submit for approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-29 11:26:57.339059",
+  "name": "Process",
+  "workflow_action_name": "Process"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 12:16:38.167055",
+  "name": "Send for QC",
+  "workflow_action_name": "Send for QC"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 12:16:38.301202",
+  "name": "Verify & Dispatch",
+  "workflow_action_name": "Verify & Dispatch"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 12:16:38.307274",
+  "name": "Reject QC",
+  "workflow_action_name": "Reject QC"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 12:22:35.490405",
+  "name": "Request Verification",
+  "workflow_action_name": "Request Verification"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 12:22:35.606550",
+  "name": "Approve Credit Note",
+  "workflow_action_name": "Approve Credit Note"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 12:22:35.616204",
+  "name": "Reject Return",
+  "workflow_action_name": "Reject Return"
+ }
+]
