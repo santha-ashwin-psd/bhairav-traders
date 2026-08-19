@@ -196,5 +196,14 @@
   "name": "Return Approved",
   "style": "Success",
   "workflow_state_name": "Return Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 13:25:00.768707",
+  "name": "Approved & Submitted",
+  "style": "Success",
+  "workflow_state_name": "Approved & Submitted"
  }
 ]

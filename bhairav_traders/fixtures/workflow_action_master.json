@@ -2,6 +2,20 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 13:25:00.903834",
+  "name": "Submit Standard Invoice",
+  "workflow_action_name": "Submit Standard Invoice"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-19 13:25:00.928232",
+  "name": "Request Return Approval",
+  "workflow_action_name": "Request Return Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
   "modified": "2026-07-23 11:53:26.386903",
   "name": "Approve",
   "workflow_action_name": "Approve"
