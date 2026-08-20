@@ -60,7 +60,11 @@ has_website_permission = {
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Sales Order" : "public/js/sales_order.js"}
+doctype_js = {
+	"Sales Order": "public/js/sales_order.js",
+	"Pick List": "public/js/pick_list.js",
+	"Sales Invoice": "public/js/sales_invoice.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -168,8 +172,7 @@ doc_events = {
 	"Sales Invoice": {
 		"before_submit": [
 			"bhairav_traders.credit_limit.validate_sales_invoice_locking",
-			"bhairav_traders.credit_limit.validate_advance_payment",
-			"bhairav_traders.utils.invoicing.validate_eway_bill"
+			"bhairav_traders.credit_limit.validate_advance_payment"
 		],
 		"on_submit": "bhairav_traders.credit_limit.sales_invoice_on_submit"
 	},
@@ -291,7 +294,7 @@ extend_doctype_class = {
 
 fixtures = [
     "Role",
-    "Custom Field",
+    {"dt": "Custom Field", "filters": [["name", "not in", ["Sales Invoice-e_way_bill_no", "Sales Invoice-irn"]]]},
     "Property Setter",
     "Custom DocPerm",
     {"dt": "Workspace", "filters": [["name", "like", "Atulya%"]]},

@@ -263,10 +263,10 @@ def sales_invoice_on_submit(doc, method=None):
         per_billed = frappe.db.get_value("Sales Order", so_name, "per_billed") or 0
         if flt(per_billed) >= 100.0:
             current_state = frappe.db.get_value("Sales Order", so_name, "workflow_state")
-            if current_state != "Completed":
-                frappe.db.set_value("Sales Order", so_name, "workflow_state", "Completed")
+            if current_state not in ["Invoiced", "Completed"]:
+                frappe.db.set_value("Sales Order", so_name, "workflow_state", "Invoiced")
                 so_doc = frappe.get_doc("Sales Order", so_name)
-                so_doc.add_comment("Comment", text=f"Workflow state automatically marked as Completed because Sales Invoice {doc.name} fulfilled 100% billing.")
+                so_doc.add_comment("Comment", text=f"Workflow state automatically marked as Invoiced because Sales Invoice {doc.name} fulfilled 100% billing.")
 
 def set_permissions():
     """Run via bench execute bhairav_traders.credit_limit.set_permissions"""

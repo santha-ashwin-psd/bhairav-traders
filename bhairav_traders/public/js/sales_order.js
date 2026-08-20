@@ -1,6 +1,22 @@
 frappe.ui.form.on('Sales Order', {
     refresh: function(frm) {
         set_workflow_indicator(frm);
+        
+        // Hide the "Create -> Sales Invoice" button for Commercial users to prevent bypassing the workflow
+        if (frappe.user.has_role("Commercial") && !frappe.user.has_role("System Manager")) {
+            setTimeout(() => {
+                frm.remove_custom_button('Sales Invoice', 'Create');
+            }, 100);
+        }
+
+        // Hide unnecessary options for Warehouse Manager to keep the UI clean
+        if (frappe.user.has_role("Warehouse Manager") && !frappe.user.has_role("System Manager")) {
+            setTimeout(() => {
+                frm.remove_custom_button('Material Request', 'Create');
+                frm.remove_custom_button('Request for Raw Materials', 'Create');
+                frm.remove_custom_button('Sales Invoice', 'Create');
+            }, 100);
+        }
     },
     workflow_state: function(frm) {
         set_workflow_indicator(frm);
