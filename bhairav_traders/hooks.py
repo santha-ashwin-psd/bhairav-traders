@@ -60,7 +60,7 @@ has_website_permission = {
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Sales Order" : "public/js/sales_order.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -162,7 +162,8 @@ doc_events = {
 			"bhairav_traders.credit_limit.validate_sales_order_credit",
 			"bhairav_traders.utils.dealer_scheme.apply_dealer_scheme_discount"
 		],
-		"after_insert": "bhairav_traders.credit_limit.after_insert_sales_order"
+		"after_insert": "bhairav_traders.credit_limit.after_insert_sales_order",
+		"on_update_after_submit": "bhairav_traders.credit_limit.validate_so_completion"
 	},
 	"Sales Invoice": {
 		"before_submit": [
@@ -298,5 +299,6 @@ fixtures = [
     {"dt": "Dashboard Chart", "filters": [["chart_name", "like", "Atulya%"]]},
     {"dt": "Workflow", "filters": [["name", "like", "Atulya%"]]},
     "Workflow State",
-    "Workflow Action Master"
+    "Workflow Action Master",
+    "Notification"
 ]

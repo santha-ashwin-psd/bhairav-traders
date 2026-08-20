@@ -124,5 +124,96 @@
   "modified": "2026-08-19 12:22:35.616204",
   "name": "Reject Return",
   "workflow_action_name": "Reject Return"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 09:57:55.609433",
+  "name": "Skip",
+  "workflow_action_name": "Skip"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 09:57:55.641993",
+  "name": "Credit Check Passed",
+  "workflow_action_name": "Credit Check Passed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 09:57:55.649214",
+  "name": "Create Pick List",
+  "workflow_action_name": "Create Pick List"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 09:57:55.655465",
+  "name": "Dispatch",
+  "workflow_action_name": "Dispatch"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 09:57:55.662054",
+  "name": "Invoice",
+  "workflow_action_name": "Invoice"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 09:57:55.667711",
+  "name": "Complete",
+  "workflow_action_name": "Complete"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.547400",
+  "name": "Credit Approve",
+  "workflow_action_name": "Credit Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.558568",
+  "name": "Credit Hold",
+  "workflow_action_name": "Credit Hold"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.564077",
+  "name": "Recheck Credit",
+  "workflow_action_name": "Recheck Credit"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.573269",
+  "name": "Mark Packed",
+  "workflow_action_name": "Mark Packed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.579933",
+  "name": "Send to Dispatch",
+  "workflow_action_name": "Send to Dispatch"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.586881",
+  "name": "Submit Invoice",
+  "workflow_action_name": "Submit Invoice"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.594621",
+  "name": "Cancel",
+  "workflow_action_name": "Cancel"
  }
 ]

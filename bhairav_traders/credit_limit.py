@@ -132,18 +132,31 @@ def validate_sales_order_credit(doc, method=None):
         grand_total = flt(doc.grand_total)
         total_exposure = flt(total_outstanding) + grand_total
         
-        if total_exposure > credit_limit and doc.is_new():
+        doc.credit_exposure = total_exposure
+        doc.available_credit = credit_limit - total_exposure if credit_limit > total_exposure else 0.0
+        
+        if total_exposure > credit_limit:
             is_breached = True
             breach_reason.append(f"Limit: ₹{credit_limit:,.2f}, Total Exposure: ₹{total_exposure:,.2f}")
 
-    if getattr(doc, "is_new", lambda: False)():
-        if is_breached:
-            doc.credit_limit_breached = 1
-            doc.credit_breach_reason = " | ".join(breach_reason)[:140]
-            frappe.msgprint(_("Warning: Credit controls breached. This order will require Manager approval. Reason: {0}").format(doc.credit_breach_reason), alert=True)
-        else:
-            doc.credit_limit_breached = 0
-            doc.credit_breach_reason = ""
+    if is_breached:
+        doc.credit_limit_breached = 1
+        doc.credit_breach_reason = " | ".join(breach_reason)[:140]
+        if doc.workflow_state == "Pending Customer Approval":
+            # State transitions to Pending Customer Approval ONLY when Commercial clicks "Credit Approve"
+            frappe.throw(_("Credit Limit Exceeded! You must select 'Credit Hold'. Total Exposure: ₹{0:,.2f} exceeds Limit: ₹{1:,.2f}").format(total_exposure, credit_limit))
+    else:
+        doc.credit_limit_breached = 0
+        doc.credit_breach_reason = ""
+        
+    # Map Workflow State to Credit Check Status
+    if doc.workflow_state == "Credit Hold":
+        doc.credit_check_status = "Credit Hold"
+    elif doc.workflow_state in ["Pending Customer Approval", "Customer Approved", "Ready for Picking", "Packed", "Ready for Dispatch", "Dispatched", "Invoiced", "Completed"]:
+        doc.credit_check_status = "Approved"
+    elif doc.workflow_state in ["Draft", "Pending Sales Manager Approval", "Pending Regional Manager Approval", "Pending Sales Head Approval", "Pending Director Approval", "Pending Commercial Credit Check"]:
+        doc.credit_check_status = "Pending"
+
 
 
 def validate_sales_invoice_locking(doc, method=None):
@@ -294,3 +307,65 @@ def set_permissions():
     
     frappe.clear_cache(doctype=doctype)
     print("Permissions updated successfully!")
+
+@frappe.whitelist()
+def get_customer_credit_details(customer, company):
+    if not customer:
+        return {"credit_limit": 0, "total_outstanding": 0}
+        
+    credit_limit = frappe.db.get_value(
+        "Customer Credit Limit",
+        {"parent": customer, "company": company},
+        "credit_limit"
+    ) or 0
+    
+    total_outstanding = frappe.db.sql("""
+        SELECT SUM(outstanding_amount)
+        FROM `tabSales Invoice`
+        WHERE customer = %s AND docstatus = 1
+    """, (customer,))[0][0] or 0.0
+    
+    return {
+        "credit_limit": frappe.utils.flt(credit_limit),
+        "total_outstanding": frappe.utils.flt(total_outstanding)
+    }
+
+def validate_so_completion(doc, method=None):
+    """
+    Blocks the 'Complete' workflow action on a Sales Order unless
+    all linked Sales Invoices are fully paid (outstanding_amount = 0).
+    """
+    if doc.workflow_state != "Completed":
+        return
+
+    # Find all linked submitted Sales Invoices
+    invoices = frappe.get_all(
+        "Sales Invoice",
+        filters={
+            "docstatus": 1,
+            "customer": doc.customer,
+        },
+        fields=["name", "outstanding_amount", "grand_total"],
+    )
+
+    # Filter to only those linked to this Sales Order via Sales Invoice Item
+    linked = frappe.db.sql("""
+        SELECT DISTINCT si.name, si.outstanding_amount, si.grand_total
+        FROM `tabSales Invoice` si
+        INNER JOIN `tabSales Invoice Item` sii ON sii.parent = si.name
+        WHERE sii.sales_order = %s AND si.docstatus = 1
+    """, (doc.name,), as_dict=True)
+
+    if not linked:
+        frappe.throw(_(
+            "Cannot mark as Completed. No submitted Sales Invoice found linked to this Sales Order. "
+            "Please create and submit a Sales Invoice first."
+        ))
+
+    unpaid = [inv for inv in linked if flt(inv.outstanding_amount) > 0]
+    if unpaid:
+        names = ", ".join([inv.name for inv in unpaid])
+        frappe.throw(_(
+            "Cannot mark as Completed. The following Sales Invoice(s) still have outstanding payments: "
+            "<b>{0}</b>. Please collect payment before completing this order."
+        ).format(names))

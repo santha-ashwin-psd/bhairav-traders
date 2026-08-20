@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 0,
+  "modified": "2026-08-20 12:26:11.391419",
+  "module": "Bhairav Traders",
+  "name": "Sales Order List Workflow State",
+  "script": "\nfrappe.listview_settings[\"Sales Order\"].get_indicator = function(doc) {\n    if (doc.workflow_state) {\n        let color = \"blue\";\n        if (doc.workflow_state === \"Order Completed\" || doc.workflow_state === \"Completed\") color = \"green\";\n        if (doc.workflow_state === \"Rejected\" || doc.workflow_state === \"Credit Hold\") color = \"red\";\n        if (doc.workflow_state === \"Draft\") color = \"gray\";\n        if (doc.workflow_state === \"Invoiced\" || doc.workflow_state === \"Dispatched\") color = \"orange\";\n        return [__(doc.workflow_state), color, \"workflow_state,=,\" + doc.workflow_state];\n    }\n    return [__(doc.status), \"gray\", \"status,=,\" + doc.status];\n};\n",
+  "view": "List"
+ }
+]
