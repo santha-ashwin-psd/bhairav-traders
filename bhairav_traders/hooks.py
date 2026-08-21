@@ -176,9 +176,13 @@ doc_events = {
 		],
 		"on_submit": "bhairav_traders.credit_limit.sales_invoice_on_submit"
 	},
+	"Pick List": {
+		"on_submit": "bhairav_traders.portal_utils.sync_so_packed_status"
+	},
 	"Delivery Note": {
 		"before_submit": "bhairav_traders.credit_limit.validate_advance_payment",
-		"before_save": "bhairav_traders.utils.logistics.delivery_note_before_save"
+		"before_save": "bhairav_traders.utils.logistics.delivery_note_before_save",
+		"on_submit": "bhairav_traders.portal_utils.sync_so_dispatched_status"
 	},
 	"Payment Entry": {
 		"on_submit": "bhairav_traders.discount.payment_entry_on_submit"

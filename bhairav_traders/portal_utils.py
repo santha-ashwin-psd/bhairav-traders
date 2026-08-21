@@ -235,3 +235,33 @@ def reject_customer_order(order_name, reason):
     return "Success"
 def has_customer_ledger_website_permission(doc, ptype, user, verbose=False):
     return _check_doc_customer_permission("Customer Ledger", doc)
+
+def sync_so_packed_status(doc, method):
+    # Update linked Sales Orders to 'Packed' if they are 'Customer Approved'
+    sales_orders = set([loc.sales_order for loc in doc.locations if loc.sales_order])
+    for so_name in sales_orders:
+        current_state = frappe.db.get_value("Sales Order", so_name, "workflow_state")
+        if current_state in ["Customer Approved", "Approved"]:
+            frappe.db.set_value("Sales Order", so_name, "workflow_state", "Packed")
+
+def sync_so_dispatched_status(doc, method):
+    # Update linked Sales Orders to 'Dispatched'
+    sales_orders = set([item.against_sales_order for item in doc.items if item.against_sales_order])
+    for so_name in sales_orders:
+        current_state = frappe.db.get_value("Sales Order", so_name, "workflow_state")
+        # Only update if it's currently Packed or Customer Approved
+        if current_state in ["Packed", "Customer Approved", "Approved", "Ready for Dispatch"]:
+            frappe.db.set_value("Sales Order", so_name, "workflow_state", "Dispatched")
+
+@frappe.whitelist()
+def has_unsubmitted_delivery_documents(sales_order_name):
+    # Check if there are any Draft (docstatus=0) Delivery Notes or Pick Lists
+    has_dn = frappe.db.exists("Delivery Note Item", {
+        "against_sales_order": sales_order_name,
+        "docstatus": 0
+    })
+    has_pl = frappe.db.exists("Pick List Item", {
+        "sales_order": sales_order_name,
+        "docstatus": 0
+    })
+    return bool(has_dn or has_pl)

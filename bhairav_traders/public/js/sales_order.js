@@ -17,6 +17,22 @@ frappe.ui.form.on('Sales Order', {
                 frm.remove_custom_button('Sales Invoice', 'Create');
             }, 100);
         }
+
+        // Prevent creating multiple draft delivery notes / pick lists
+        if (!frm.is_new() && frm.doc.docstatus === 1) {
+            frappe.call({
+                method: "bhairav_traders.portal_utils.has_unsubmitted_delivery_documents",
+                args: { sales_order_name: frm.doc.name },
+                callback: function(r) {
+                    if (r.message) {
+                        setTimeout(() => {
+                            frm.remove_custom_button('Delivery Note', 'Create');
+                            frm.remove_custom_button('Pick List', 'Create');
+                        }, 100);
+                    }
+                }
+            });
+        }
     },
     workflow_state: function(frm) {
         set_workflow_indicator(frm);
