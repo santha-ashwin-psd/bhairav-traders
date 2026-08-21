@@ -63,7 +63,8 @@ has_website_permission = {
 doctype_js = {
 	"Sales Order": "public/js/sales_order.js",
 	"Pick List": "public/js/pick_list.js",
-	"Sales Invoice": "public/js/sales_invoice.js"
+	"Sales Invoice": "public/js/sales_invoice.js",
+	"Payment Entry": "public/js/payment_entry.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

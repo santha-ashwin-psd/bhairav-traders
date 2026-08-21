@@ -265,3 +265,21 @@ def has_unsubmitted_delivery_documents(sales_order_name):
         "docstatus": 0
     })
     return bool(has_dn or has_pl)
+
+@frappe.whitelist()
+def check_advance_payment_needed_for_invoice(invoice_name):
+    # Check if any linked Sales Order requires advance payment
+    if not invoice_name:
+        return False
+    doc = frappe.get_doc("Sales Invoice", invoice_name)
+    if not doc.items:
+        return False
+    for item in doc.items:
+        if item.sales_order:
+            req = frappe.db.get_value("Sales Order", item.sales_order, "requires_advance_payment")
+            if req:
+                adv = frappe.db.get_value("Sales Order", item.sales_order, "advance_paid") or 0
+                tot = frappe.db.get_value("Sales Order", item.sales_order, "grand_total") or 0
+                if frappe.utils.flt(adv) < frappe.utils.flt(tot):
+                    return item.sales_order
+    return False

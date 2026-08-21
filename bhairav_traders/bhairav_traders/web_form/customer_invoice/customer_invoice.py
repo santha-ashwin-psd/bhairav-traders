@@ -17,12 +17,21 @@ def get_customer_invoices(doctype, txt=None, filters=None, limit_start=0, limit_
     if not customer:
         return []
         
-    return frappe.get_all(
+    invoices = frappe.get_all(
         "Sales Invoice",
         filters={"customer": customer, "docstatus": 1},
-        fields=["name", "posting_date", "due_date", "grand_total", "outstanding_amount", "status"],
+        fields=["name", "posting_date", "due_date", "grand_total", "outstanding_amount", "status", "is_return"],
         order_by="posting_date desc",
         limit_start=limit_start,
         limit_page_length=limit_page_length,
         ignore_permissions=True
     )
+    
+    for inv in invoices:
+        if inv.is_return:
+            if inv.outstanding_amount >= 0:
+                inv.status = "Refunded"
+            else:
+                inv.status = "Return"
+                
+    return invoices

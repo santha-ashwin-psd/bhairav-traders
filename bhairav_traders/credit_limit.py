@@ -169,6 +169,9 @@ def validate_sales_invoice_locking(doc, method=None):
         return
         
     if getattr(doc, "is_return", 0):
+        user_roles = frappe.get_roles(frappe.session.user)
+        if "Accounts Manager" not in user_roles and "Finance Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
+            frappe.throw(_("Only the Finance Manager (Accounts Manager) or Director is authorized to approve and submit Sales Returns."))
         return
         
     # Check linked Sales Orders for customer approval
@@ -190,8 +193,8 @@ def validate_sales_invoice_locking(doc, method=None):
         if doc.approved_during_lock:
             # Check permission: User must have System Manager, Accounts Manager, or Director role
             user_roles = frappe.get_roles(frappe.session.user)
-            if "Accounts Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
-                frappe.throw(_("Only Accounts Manager or Director is authorized to approve invoicing for locked accounts."))
+            if "Accounts Manager" not in user_roles and "Finance Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
+                frappe.throw(_("Only the Finance Manager or Director is authorized to approve invoicing for locked accounts."))
         else:
             customer_doc = frappe.get_doc("Customer", doc.customer)
             frappe.throw(

@@ -28,6 +28,16 @@ def get_customer_ledger_entries(doctype, txt=None, filters=None, limit_start=0, 
         ignore_permissions=True
     )
     
+    for entry in entries:
+        if entry.voucher_type == "Sales Invoice":
+            is_return = frappe.db.get_value("Sales Invoice", entry.voucher_no, "is_return")
+            if is_return:
+                entry.voucher_type = "Sales Return"
+        elif entry.voucher_type == "Payment Entry":
+            payment_type = frappe.db.get_value("Payment Entry", entry.voucher_no, "payment_type")
+            if payment_type == "Pay":
+                entry.voucher_type = "Refund"
+                
     return entries
 
 def flt(val):
