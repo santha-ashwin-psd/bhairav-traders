@@ -34,7 +34,7 @@ def get_pending_approvals(
         "Sales Order",
         filters={
             "customer": customer,
-            "customer_approval_status": "Pending",
+            "workflow_state": "Pending Customer Approval",
         },
         fields=["name", "transaction_date", "grand_total", "customer_approval_status"],
         order_by="creation desc",
