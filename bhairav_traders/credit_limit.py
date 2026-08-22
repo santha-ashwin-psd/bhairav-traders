@@ -81,6 +81,12 @@ def validate_sales_order_credit(doc, method=None):
                 item.rate = flt(std_rate)
             if getattr(item, "qty", None) and getattr(item, "rate", None):
                 item.amount = flt(item.qty) * flt(item.rate)
+                
+            # Below Minimum Margin check
+            if getattr(item, "item_code", None):
+                val_rate = frappe.db.get_value("Item", item.item_code, "valuation_rate") or 0.0
+                if flt(val_rate) > 0 and flt(item.rate) < flt(val_rate):
+                    frappe.throw(_("Approval Required: Selling rate for {0} is below the minimum margin (valuation rate).").format(item.item_code))
         
     # Check if placed by salesman (only on first creation)
     if doc.is_new() and is_salesman_user(frappe.session.user):
@@ -169,6 +175,9 @@ def validate_sales_invoice_locking(doc, method=None):
         return
         
     if getattr(doc, "is_return", 0):
+        if getattr(doc, "workflow_state", None) and doc.workflow_state != "Return Approved":
+            frappe.throw(_("Return Blocked: Credit Note must be 'Return Approved' before submission."))
+            
         user_roles = frappe.get_roles(frappe.session.user)
         if "Accounts Manager" not in user_roles and "Finance Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
             frappe.throw(_("Only the Finance Manager (Accounts Manager) or Director is authorized to approve and submit Sales Returns."))
@@ -188,7 +197,6 @@ def validate_sales_invoice_locking(doc, method=None):
                     )
 
     is_locked = check_account_lock_status(doc.customer)
-    
     if is_locked:
         if doc.approved_during_lock:
             # Check permission: User must have System Manager, Accounts Manager, or Director role
@@ -202,6 +210,20 @@ def validate_sales_invoice_locking(doc, method=None):
                     doc.customer, customer_doc.lock_reason
                 )
             )
+
+    # Hard Block Controls (Sales Invoice)
+    gst_category = doc.get("gst_category") or doc.get("tax_category")
+    if not gst_category:
+        frappe.throw(_("Invoice Blocked: Missing GST Classification (GST Category / Tax Category)."))
+        
+    if gst_category in ["Registered Regular", "SEZ", "Deemed Export"]:
+        gstin = getattr(doc, "tax_id", None) or getattr(doc, "customer_gstin", None) or getattr(doc, "billing_address_gstin", None)
+        if not gstin:
+            frappe.throw(_("B2B Invoice Blocked: Customer GSTIN is missing for Registered customer."))
+
+    for item in doc.items:
+        if not getattr(item, "gst_hsn_code", None):
+            frappe.throw(_("Invoice Blocked: Missing HSN Code for item {0}").format(item.item_code))
 
 
 def validate_advance_payment(doc, method=None):

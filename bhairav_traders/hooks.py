@@ -204,7 +204,9 @@ doc_events = {
 
 scheduler_events = {
 	"daily": [
-		"bhairav_traders.credit_limit.sync_all_customer_lock_statuses"
+		"bhairav_traders.credit_limit.sync_all_customer_lock_statuses",
+		"bhairav_traders.utils.automations.send_payment_reminders",
+		"bhairav_traders.utils.automations.send_pending_order_alerts"
 	]
 }
 
