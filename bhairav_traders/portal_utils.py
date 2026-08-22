@@ -143,14 +143,23 @@ def get_item_search_results(doctype=None, txt="", searchfield=None, start=0, pag
     """, (txt, txt), as_dict=True)
 
 def get_portal_sidebar_items():
-    return [
+    items = [
         {"title": "Dashboard", "route": "/portal", "label": "Dashboard"},
         {"title": "Place Order", "route": "/customer-order", "label": "Place Order"},
+        {"title": "Quotations", "route": "/quotations", "label": "Quotations"},
         {"title": "Pending Approvals", "route": "/customer-pending-approvals", "label": "Pending Approvals"},
         {"title": "My Ledger", "route": "/customer-ledger", "label": "My Ledger"},
         {"title": "Invoices", "route": "/customer-invoice", "label": "Invoices"},
         {"title": "Support Requests", "route": "/customer-support-request", "label": "Support Requests"},
     ]
+
+    customer = get_current_customer()
+    if customer:
+        customer_group = frappe.db.get_value("Customer", customer, "customer_group")
+        if customer_group in ["Regular Dealer", "Distributor"]:
+            items = [item for item in items if item.get("title") != "Quotations"]
+            
+    return items
 
 def update_website_context(context):
     """
@@ -165,6 +174,7 @@ def update_website_context(context):
         "customer-ledger",
         "customer-support-request",
         "customer-pending-approvals",
+        "quotations",
     ]
     
     should_show_sidebar = False
@@ -232,6 +242,34 @@ def reject_customer_order(order_name, reason):
     # We might want to store the reason in a custom field or comments, for now we add a comment
     doc.add_comment("Comment", text=f"Rejected by customer. Reason: {reason}")
     # add_comment saves the comment to the Communication table, no need to save the SO doc itself.
+    return "Success"
+
+@frappe.whitelist()
+def accept_quotation(quotation_name):
+    customer = get_current_customer()
+    if not customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    doc = frappe.get_doc("Quotation", quotation_name)
+    if doc.party_name != customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    # Mark as accepted via comment for audit trail
+    doc.add_comment("Comment", text="✅ <b>Accepted by Customer via Portal</b><br>The customer has digitally approved this Quotation.")
+    
+    return "Success"
+
+@frappe.whitelist()
+def reject_quotation(quotation_name, reason):
+    customer = get_current_customer()
+    if not customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    doc = frappe.get_doc("Quotation", quotation_name)
+    if doc.party_name != customer:
+        frappe.throw("Not permitted", frappe.PermissionError)
+        
+    doc.add_comment("Comment", text=f"❌ <b>Rejected by Customer via Portal</b><br>Reason: {reason}")
     return "Success"
 def has_customer_ledger_website_permission(doc, ptype, user, verbose=False):
     return _check_doc_customer_permission("Customer Ledger", doc)

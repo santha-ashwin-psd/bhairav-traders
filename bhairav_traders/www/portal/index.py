@@ -27,7 +27,8 @@ def get_context(context):
     context.customer_name = customer_doc.customer_name
 
     # Check lock status
-    context.is_locked = check_account_lock_status(customer)
+    is_locked, max_overdue_days = check_account_lock_status(customer)
+    context.is_locked = is_locked
     context.lock_reason = customer_doc.lock_reason
 
     # Get credit limit

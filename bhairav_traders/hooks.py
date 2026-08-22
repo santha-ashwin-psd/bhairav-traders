@@ -165,6 +165,7 @@ doc_events = {
 	"Sales Order": {
 		"validate": [
 			"bhairav_traders.credit_limit.validate_sales_order_credit",
+			"bhairav_traders.credit_limit.validate_quotation_mandatory",
 			"bhairav_traders.utils.dealer_scheme.apply_dealer_scheme_discount"
 		],
 		"after_insert": "bhairav_traders.credit_limit.after_insert_sales_order",
@@ -172,6 +173,7 @@ doc_events = {
 		"on_update_after_submit": "bhairav_traders.credit_limit.validate_so_completion"
 	},
 	"Sales Invoice": {
+		"validate": "bhairav_traders.credit_limit.validate_sales_invoice_return",
 		"before_submit": [
 			"bhairav_traders.credit_limit.validate_sales_invoice_locking",
 			"bhairav_traders.credit_limit.validate_advance_payment"
@@ -179,6 +181,7 @@ doc_events = {
 		"on_submit": "bhairav_traders.credit_limit.sales_invoice_on_submit"
 	},
 	"Pick List": {
+		"validate": "bhairav_traders.utils.logistics.validate_single_pick_list",
 		"on_submit": "bhairav_traders.portal_utils.sync_so_packed_status"
 	},
 	"Delivery Note": {

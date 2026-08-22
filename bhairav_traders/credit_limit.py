@@ -66,6 +66,48 @@ def check_account_lock_status(customer_name):
     return is_locked, max_days_old
 
 
+def validate_quotation_mandatory(doc):
+    """
+    Enforce Mandatory Quotation Rules (Section 3.2)
+    """
+    # Bypass for Customer Portal users
+    roles = frappe.get_roles(frappe.session.user)
+    if "Customer" in roles:
+        return
+
+    # Check if the Sales Order is linked to a Quotation
+    has_quotation = False
+    for item in doc.items:
+        if (item.prevdoc_docname and item.prevdoc_docname.startswith("QT-")) or item.quotation_item:
+            has_quotation = True
+            break
+            
+    if has_quotation:
+        return
+
+    # 1. New Customer Enquiry (0 submitted Sales Orders)
+    if doc.customer:
+        so_count = frappe.db.count("Sales Order", filters={"customer": doc.customer, "docstatus": 1})
+        if so_count == 0:
+            frappe.throw(_("A Quotation is mandatory for New Customers. Please create a Quotation first."))
+
+    # 2. Project / bulk order
+    if doc.customer_group == "Project Customer":
+        frappe.throw(_("A Quotation is mandatory for Project Customers."))
+
+    # 3. Government / institutional tender
+    if doc.customer_group in ["Government", "Institutional"]:
+        frappe.throw(_("A Quotation is mandatory for Government and Institutional tenders."))
+
+    # 4. Export order
+    if doc.currency != "INR" or doc.get("is_export_with_gst"):
+        frappe.throw(_("A Quotation is mandatory for Export orders."))
+
+    # 5. Special price / discount
+    if flt(doc.additional_discount_percentage) > 0:
+        frappe.throw(_("A Quotation is mandatory when offering an additional discount. Please create a Quotation first."))
+
+
 def validate_sales_order_credit(doc, method=None):
     """
     Validates Credit Limit and Salesman Order Approval rules on Sales Order:
@@ -90,9 +132,10 @@ def validate_sales_order_credit(doc, method=None):
                 
             # Below Minimum Margin check
             if getattr(item, "item_code", None):
-                val_rate = frappe.db.get_value("Item", item.item_code, "valuation_rate") or 0.0
+                # Fallback to standard_rate if valuation_rate is 0 (e.g. no stock yet)
+                val_rate = frappe.db.get_value("Item", item.item_code, "valuation_rate") or frappe.db.get_value("Item", item.item_code, "standard_rate") or 0.0
                 if flt(val_rate) > 0 and flt(item.rate) < flt(val_rate):
-                    frappe.throw(_("Approval Required: Selling rate for {0} is below the minimum margin (valuation rate).").format(item.item_code))
+                    frappe.throw(_("Approval Required: Selling rate for {0} is below the minimum margin (cost/valuation rate).").format(item.item_code))
         
     # Check if placed by salesman (only on first creation)
     if doc.is_new() and is_salesman_user(frappe.session.user):
@@ -186,6 +229,9 @@ def validate_sales_order_credit(doc, method=None):
         doc.credit_check_status = "Approved"
     elif doc.workflow_state in ["Draft", "Pending Sales Manager Approval", "Pending Regional Manager Approval", "Pending Sales Head Approval", "Pending Director Approval", "Pending Commercial Credit Check"]:
         doc.credit_check_status = "Pending"
+
+    # Enforce Section 3.2 Quotation rules
+    validate_quotation_mandatory(doc)
 
 
 
@@ -430,3 +476,21 @@ def validate_so_completion(doc, method=None):
             "Cannot mark as Completed. The following Sales Invoice(s) still have outstanding payments: "
             "<b>{0}</b>. Please collect payment before completing this order."
         ).format(names))
+
+def validate_sales_invoice_return(doc, method=None):
+    if not doc.is_return:
+        return
+        
+    reason_map = {
+        "Manufacturing Defect": "Sales Return",
+        "Transit Damage": "Damage",
+        "Wrong Item Supplied": "Short Supply / Billing Error",
+        "Excess Supply": "Short Supply / Billing Error",
+        "Warranty Return": "Warranty Credit Note",
+        "Commercial Return": "Rate Difference",
+        "Scheme Return": "Scheme Adjustment"
+    }
+    
+    if doc.custom_return_reason:
+        doc.custom_credit_note_reason = reason_map.get(doc.custom_return_reason, doc.custom_return_reason)
+
