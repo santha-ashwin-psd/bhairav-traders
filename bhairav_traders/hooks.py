@@ -168,6 +168,7 @@ doc_events = {
 			"bhairav_traders.utils.dealer_scheme.apply_dealer_scheme_discount"
 		],
 		"after_insert": "bhairav_traders.credit_limit.after_insert_sales_order",
+		"on_update": "bhairav_traders.credit_limit.sales_order_on_update",
 		"on_update_after_submit": "bhairav_traders.credit_limit.validate_so_completion"
 	},
 	"Sales Invoice": {
@@ -206,7 +207,9 @@ scheduler_events = {
 	"daily": [
 		"bhairav_traders.credit_limit.sync_all_customer_lock_statuses",
 		"bhairav_traders.utils.automations.send_payment_reminders",
-		"bhairav_traders.utils.automations.send_pending_order_alerts"
+		"bhairav_traders.utils.automations.send_pending_order_alerts",
+		"bhairav_traders.utils.automations.send_due_today_alerts",
+		"bhairav_traders.utils.automations.send_overdue_warnings"
 	]
 }
 

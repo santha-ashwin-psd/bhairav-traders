@@ -36,12 +36,18 @@ def check_account_lock_status(customer_name):
     today_date = getdate(today())
     is_locked = False
     lock_reasons = []
+    max_days_old = 0
     
     for inv in overdue_invoices:
-        days_old = date_diff(today_date, inv.posting_date)
-        if days_old > credit_days:
+        # Check against due_date for overdue alerts (not posting_date)
+        days_old = date_diff(today_date, inv.due_date)
+        if days_old > max_days_old:
+            max_days_old = days_old
+            
+        # Lock status uses credit_days limit
+        if date_diff(today_date, inv.posting_date) > credit_days:
             is_locked = True
-            lock_reasons.append(f"Invoice {inv.name} ({inv.posting_date}) is unpaid beyond {credit_days} days (Age: {days_old} days, Outstanding: ₹{inv.outstanding_amount:,.2f})")
+            lock_reasons.append(f"Invoice {inv.name} is unpaid beyond {credit_days} days (Age: {date_diff(today_date, inv.posting_date)} days, Outstanding: ₹{inv.outstanding_amount:,.2f})")
             
     if is_locked:
         reason_str = " | ".join(lock_reasons[:3])
@@ -57,7 +63,7 @@ def check_account_lock_status(customer_name):
                 "lock_reason": ""
             })
             
-    return is_locked
+    return is_locked, max_days_old
 
 
 def validate_sales_order_credit(doc, method=None):
@@ -104,8 +110,26 @@ def validate_sales_order_credit(doc, method=None):
                     frappe.throw(_("Only Administrators or the Customer (via portal) can modify 'Placed By Salesman' or 'Customer Approval Status'."))
 
     # Check and update account lock status
-    is_locked = check_account_lock_status(doc.customer)
+    is_locked, max_overdue_days = check_account_lock_status(doc.customer)
     customer_doc = frappe.get_doc("Customer", doc.customer)
+    
+    # Enforce Tiered Overdue Limits (Section 6.2)
+    if max_overdue_days >= 8 and max_overdue_days <= 30:
+        roles = frappe.get_roles(frappe.session.user)
+        if "Commercial" not in roles and frappe.session.user != "Administrator":
+            if doc.workflow_state not in ["Draft", "", None]:
+                frappe.throw(_("Hold Warning: Customer has invoices {0} days overdue. Only the Commercial Manager can process this order past the Draft stage.").format(max_overdue_days))
+            else:
+                frappe.msgprint(_("Customer is {0} days overdue. Order will be automatically placed on Credit Hold upon saving.").format(max_overdue_days), alert=True)
+            
+    if max_overdue_days >= 31 and max_overdue_days <= 60:
+        if frappe.session.user != "Administrator":
+            frappe.throw(_("Hold: Customer has invoices {0} days overdue (31-60 days limit). Sales Orders are strictly blocked.").format(max_overdue_days))
+            
+    if max_overdue_days > 60:
+        roles = frappe.get_roles(frappe.session.user)
+        if "Finance Manager" not in roles and "Accounts Manager" not in roles and frappe.session.user != "Administrator":
+            frappe.throw(_("Hard Block: Customer has invoices {0} days overdue (>60 days limit). Only the Finance Manager can bypass this lock.").format(max_overdue_days))
     
     is_breached = False
     breach_reason = []
@@ -196,7 +220,7 @@ def validate_sales_invoice_locking(doc, method=None):
                         )
                     )
 
-    is_locked = check_account_lock_status(doc.customer)
+    is_locked, max_overdue_days = check_account_lock_status(doc.customer)
     if is_locked:
         if doc.approved_during_lock:
             # Check permission: User must have System Manager, Accounts Manager, or Director role
@@ -273,6 +297,18 @@ def set_workflow_state(doc, state):
 
 def after_insert_sales_order(doc, method=None):
     pass
+
+def sales_order_on_update(doc, method=None):
+    if doc.workflow_state in ["Draft", "", None]:
+        is_locked, max_overdue_days = check_account_lock_status(doc.customer)
+        if max_overdue_days >= 8 and max_overdue_days <= 30:
+            roles = frappe.get_roles(frappe.session.user)
+            if "Commercial" not in roles and frappe.session.user != "Administrator":
+                frappe.db.set_value("Sales Order", doc.name, "workflow_state", "Credit Hold")
+                frappe.db.set_value("Sales Order", doc.name, "credit_check_status", "Credit Hold")
+                # Update doc object in memory so UI refreshes immediately
+                doc.workflow_state = "Credit Hold"
+                doc.credit_check_status = "Credit Hold"
 def sales_invoice_on_submit(doc, method=None):
     """
     Called on_submit of Sales Invoice.
