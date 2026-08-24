@@ -165,15 +165,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2026-08-20 09:57:55.363238",
-  "name": "Pending Sales Manager Approval",
-  "style": "Warning",
-  "workflow_state_name": "Pending Sales Manager Approval"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2026-08-20 09:57:55.520518",
   "name": "Sales Manager Approved",
   "style": "Success",
@@ -327,15 +318,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2026-08-19 12:22:35.676096",
-  "name": "Return Requested",
-  "style": "Primary",
-  "workflow_state_name": "Return Requested"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2026-08-20 09:57:55.581791",
   "name": "Dispatched",
   "style": "Success",
@@ -349,6 +331,33 @@
   "name": "Pending Commercial Credit Check",
   "style": "Primary",
   "workflow_state_name": "Pending Commercial Credit Check"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-22 18:25:46.269533",
+  "name": "Submitted",
+  "style": "",
+  "workflow_state_name": "Submitted"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-20 09:57:55.363238",
+  "name": "Pending Sales Manager Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Sales Manager Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:22:35.676096",
+  "name": "Return Requested",
+  "style": "Primary",
+  "workflow_state_name": "Return Requested"
  },
  {
   "docstatus": 0,

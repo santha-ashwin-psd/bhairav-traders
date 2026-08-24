@@ -215,5 +215,12 @@
   "modified": "2026-08-20 10:10:46.594621",
   "name": "Cancel",
   "workflow_action_name": "Cancel"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-22 18:25:46.409110",
+  "name": "Request Return",
+  "workflow_action_name": "Request Return"
  }
 ]

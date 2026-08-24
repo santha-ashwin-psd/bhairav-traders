@@ -49,19 +49,33 @@ def check_account_lock_status(customer_name):
             is_locked = True
             lock_reasons.append(f"Invoice {inv.name} is unpaid beyond {credit_days} days (Age: {date_diff(today_date, inv.posting_date)} days, Outstanding: ₹{inv.outstanding_amount:,.2f})")
             
+    overdue_class = "None"
+    if max_days_old > 60:
+        overdue_class = "Hard Block"
+    elif max_days_old >= 31:
+        overdue_class = "Hold"
+    elif max_days_old > 0:
+        overdue_class = "Watch"
+
+    update_dict = {}
+    
     if is_locked:
         reason_str = " | ".join(lock_reasons[:3])
         if getattr(customer, "is_account_locked", 0) != 1 or getattr(customer, "lock_reason", "") != reason_str:
-            frappe.db.set_value("Customer", customer_name, {
-                "is_account_locked": 1,
-                "lock_reason": reason_str
-            })
+            update_dict["is_account_locked"] = 1
+            update_dict["lock_reason"] = reason_str
     else:
         if getattr(customer, "is_account_locked", 0) == 1:
-            frappe.db.set_value("Customer", customer_name, {
-                "is_account_locked": 0,
-                "lock_reason": ""
-            })
+            update_dict["is_account_locked"] = 0
+            update_dict["lock_reason"] = ""
+            
+    if getattr(customer, "overdue_class", "") != overdue_class:
+        update_dict["overdue_class"] = overdue_class
+    if getattr(customer, "max_overdue_days", -1) != max_days_old:
+        update_dict["max_overdue_days"] = max_days_old
+
+    if update_dict:
+        frappe.db.set_value("Customer", customer_name, update_dict)
             
     return is_locked, max_days_old
 
@@ -118,6 +132,9 @@ def validate_sales_order_credit(doc, method=None):
     """
     if not doc.customer:
         return
+
+    if flt(doc.additional_discount_percentage) > 15:
+        frappe.throw(_("Discount above 15% is not allowed. Order Auto-Rejected."))
 
     # Auto-populate delivery_date and rate on child items if missing
     if doc.items:
@@ -267,7 +284,15 @@ def validate_sales_invoice_locking(doc, method=None):
                     )
 
     is_locked, max_overdue_days = check_account_lock_status(doc.customer)
-    if is_locked:
+    
+    if max_overdue_days > 60:
+        if not doc.approved_during_lock:
+            frappe.throw(_("Hard Block: Customer has invoices {0} days overdue (>60 days limit). Invoicing is strictly blocked without Finance Manager approval.").format(max_overdue_days))
+        
+        user_roles = frappe.get_roles(frappe.session.user)
+        if "Finance Manager" not in user_roles and "Accounts Manager" not in user_roles and frappe.session.user != "Administrator":
+            frappe.throw(_("Hard Block: Customer has invoices {0} days overdue (>60 days limit). Only the Finance Manager can bypass this lock.").format(max_overdue_days))
+    elif is_locked:
         if doc.approved_during_lock:
             # Check permission: User must have System Manager, Accounts Manager, or Director role
             user_roles = frappe.get_roles(frappe.session.user)
