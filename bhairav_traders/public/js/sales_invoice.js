@@ -1,7 +1,7 @@
 frappe.ui.form.on('Sales Invoice', {
     refresh: function(frm) {
         // Hide unnecessary options in the Create dropdown to keep UI clean for Accounts team
-        if ((frappe.user.has_role("Accounts Executive") || frappe.user.has_role("Accounts User") || frappe.user.has_role("Accounts Manager")) && !frappe.user.has_role("System Manager")) {
+        if ((frappe.user.has_role("Accounts Executive") || frappe.user.has_role("Finance Manager")) && !frappe.user.has_role("System Manager")) {
             setTimeout(() => {
                 frm.remove_custom_button('Delivery Note', 'Create');
                 frm.remove_custom_button('Invoice Discounting', 'Create');
@@ -10,8 +10,8 @@ frappe.ui.form.on('Sales Invoice', {
             }, 100);
         }
 
-        // Only Finance Manager (Accounts Manager) or Director can check the override box
-        if (!frappe.user.has_role("Finance Manager") && !frappe.user.has_role("Accounts Manager") && !frappe.user.has_role("Director") && !frappe.user.has_role("System Manager")) {
+        // Only Finance Manager (Finance Manager) or Director can check the override box
+        if (!frappe.user.has_role("Finance Manager") && !frappe.user.has_role("Finance Manager") && !frappe.user.has_role("Director") && !frappe.user.has_role("System Manager")) {
             frm.set_df_property('approved_during_lock', 'read_only', 1);
         }
 

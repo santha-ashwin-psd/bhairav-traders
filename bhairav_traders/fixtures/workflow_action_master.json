@@ -16,20 +16,6 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
-  "modified": "2026-07-23 11:53:26.386903",
-  "name": "Approve",
-  "workflow_action_name": "Approve"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
-  "modified": "2026-07-23 11:53:26.392176",
-  "name": "Reject",
-  "workflow_action_name": "Reject"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
   "modified": "2026-07-23 11:53:26.395285",
   "name": "Review",
   "workflow_action_name": "Review"
@@ -58,23 +44,9 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
-  "modified": "2026-08-18 13:21:19.709005",
-  "name": "Customer Approve",
-  "workflow_action_name": "Customer Approve"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
   "modified": "2026-08-18 13:21:19.718349",
   "name": "Customer Reject",
   "workflow_action_name": "Customer Reject"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
-  "modified": "2026-07-29 11:03:14.266713",
-  "name": "Submit for approval",
-  "workflow_action_name": "Submit for approval"
  },
  {
   "docstatus": 0,
@@ -170,23 +142,9 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
-  "modified": "2026-08-20 10:10:46.547400",
-  "name": "Credit Approve",
-  "workflow_action_name": "Credit Approve"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
   "modified": "2026-08-20 10:10:46.558568",
   "name": "Credit Hold",
   "workflow_action_name": "Credit Hold"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
-  "modified": "2026-08-20 10:10:46.564077",
-  "name": "Recheck Credit",
-  "workflow_action_name": "Recheck Credit"
  },
  {
   "docstatus": 0,
@@ -222,5 +180,47 @@
   "modified": "2026-08-22 18:25:46.409110",
   "name": "Request Return",
   "workflow_action_name": "Request Return"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 11:53:26.392176",
+  "name": "Reject",
+  "workflow_action_name": "Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-18 13:21:19.709005",
+  "name": "Customer Approve",
+  "workflow_action_name": "Customer Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.564077",
+  "name": "Recheck Credit",
+  "workflow_action_name": "Recheck Credit"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-20 10:10:46.547400",
+  "name": "Credit Approve",
+  "workflow_action_name": "Credit Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-29 11:03:14.266713",
+  "name": "Submit for approval",
+  "workflow_action_name": "Submit for approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 11:53:26.386903",
+  "name": "Approve",
+  "workflow_action_name": "Approve"
  }
 ]

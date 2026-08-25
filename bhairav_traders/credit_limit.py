@@ -8,7 +8,7 @@ def is_salesman_user(user):
     if user == "Administrator":
         return True
     user_roles = frappe.get_roles(user)
-    sales_roles = {"Salesman", "Sales User", "System Manager", "Accounts Manager", "Director"}
+    sales_roles = {"Salesman", "Salesman", "System Manager", "Finance Manager", "Director"}
     return bool(sales_roles.intersection(user_roles))
 
 def check_account_lock_status(customer_name):
@@ -188,7 +188,7 @@ def validate_sales_order_credit(doc, method=None):
             
     if max_overdue_days > 60:
         roles = frappe.get_roles(frappe.session.user)
-        if "Finance Manager" not in roles and "Accounts Manager" not in roles and frappe.session.user != "Administrator":
+        if "Finance Manager" not in roles and "Finance Manager" not in roles and frappe.session.user != "Administrator":
             frappe.throw(_("Hard Block: Customer has invoices {0} days overdue (>60 days limit). Only the Finance Manager can bypass this lock.").format(max_overdue_days))
     
     is_breached = False
@@ -256,7 +256,7 @@ def validate_sales_invoice_locking(doc, method=None):
     """
     Validates account lock and customer approval on Sales Invoice submission:
     1. If Sales Order was placed by Salesman, verify Customer Approval status is 'Approved'.
-    2. Invoicing for locked accounts is blocked unless approved_during_lock is checked by Accounts Manager/Director.
+    2. Invoicing for locked accounts is blocked unless approved_during_lock is checked by Finance Manager/Director.
     """
     if not doc.customer:
         return
@@ -266,8 +266,8 @@ def validate_sales_invoice_locking(doc, method=None):
             frappe.throw(_("Return Blocked: Credit Note must be 'Return Approved' before submission."))
             
         user_roles = frappe.get_roles(frappe.session.user)
-        if "Accounts Manager" not in user_roles and "Finance Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
-            frappe.throw(_("Only the Finance Manager (Accounts Manager) or Director is authorized to approve and submit Sales Returns."))
+        if "Finance Manager" not in user_roles and "Finance Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
+            frappe.throw(_("Only the Finance Manager (Finance Manager) or Director is authorized to approve and submit Sales Returns."))
         return
         
     # Check linked Sales Orders for customer approval
@@ -290,13 +290,13 @@ def validate_sales_invoice_locking(doc, method=None):
             frappe.throw(_("Hard Block: Customer has invoices {0} days overdue (>60 days limit). Invoicing is strictly blocked without Finance Manager approval.").format(max_overdue_days))
         
         user_roles = frappe.get_roles(frappe.session.user)
-        if "Finance Manager" not in user_roles and "Accounts Manager" not in user_roles and frappe.session.user != "Administrator":
+        if "Finance Manager" not in user_roles and "Finance Manager" not in user_roles and frappe.session.user != "Administrator":
             frappe.throw(_("Hard Block: Customer has invoices {0} days overdue (>60 days limit). Only the Finance Manager can bypass this lock.").format(max_overdue_days))
     elif is_locked:
         if doc.approved_during_lock:
-            # Check permission: User must have System Manager, Accounts Manager, or Director role
+            # Check permission: User must have System Manager, Finance Manager, or Director role
             user_roles = frappe.get_roles(frappe.session.user)
-            if "Accounts Manager" not in user_roles and "Finance Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
+            if "Finance Manager" not in user_roles and "Finance Manager" not in user_roles and "System Manager" not in user_roles and "Director" not in user_roles:
                 frappe.throw(_("Only the Finance Manager or Director is authorized to approve invoicing for locked accounts."))
         else:
             customer_doc = frappe.get_doc("Customer", doc.customer)
@@ -405,7 +405,7 @@ def set_permissions():
     import frappe
     # For Sales Order
     doctype = "Sales Order"
-    roles = ["Accounts Manager", "Accounts User"]
+    roles = ["Finance Manager", "Accounts Executive"]
     
     for role in roles:
         # Check if permission exists

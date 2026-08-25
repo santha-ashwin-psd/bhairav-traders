@@ -5037,7 +5037,7 @@
   "property": "depends_on",
   "property_type": "Data",
   "row_name": null,
-  "value": "eval:!(frappe.user.has_role('Salesman') || frappe.user.has_role('Sales User'))"
+  "value": "eval:!(frappe.user.has_role('Salesman') || frappe.user.has_role('Salesman'))"
  },
  {
   "default_value": null,
@@ -5053,7 +5053,7 @@
   "property": "depends_on",
   "property_type": "Data",
   "row_name": null,
-  "value": "eval:!(frappe.user.has_role('Salesman') || frappe.user.has_role('Sales User'))"
+  "value": "eval:!(frappe.user.has_role('Salesman') || frappe.user.has_role('Salesman'))"
  },
  {
   "default_value": null,
