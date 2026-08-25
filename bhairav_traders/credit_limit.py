@@ -238,7 +238,7 @@ def validate_sales_order_credit(doc, method=None):
     else:
         doc.credit_limit_breached = 0
         doc.credit_breach_reason = ""
-        
+                
     # Map Workflow State to Credit Check Status
     if doc.workflow_state == "Credit Hold":
         doc.credit_check_status = "Credit Hold"
@@ -380,6 +380,15 @@ def sales_order_on_update(doc, method=None):
                 # Update doc object in memory so UI refreshes immediately
                 doc.workflow_state = "Credit Hold"
                 doc.credit_check_status = "Credit Hold"
+                
+    elif doc.workflow_state == "Pending Commercial Credit Check":
+        if not doc.requires_advance_payment and not doc.credit_limit_breached:
+            next_state = "Pending Customer Approval" if getattr(doc, "placed_by_salesman", 0) else "Customer Approved"
+            frappe.db.set_value("Sales Order", doc.name, "workflow_state", next_state)
+            frappe.db.set_value("Sales Order", doc.name, "credit_check_status", "Approved")
+            doc.workflow_state = next_state
+            doc.credit_check_status = "Approved"
+            doc.add_comment("Comment", text=f"Workflow state automatically advanced to {next_state} due to sufficient available credit.")
 def sales_invoice_on_submit(doc, method=None):
     """
     Called on_submit of Sales Invoice.
