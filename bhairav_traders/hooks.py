@@ -173,7 +173,10 @@ doc_events = {
 		"on_update_after_submit": "bhairav_traders.credit_limit.validate_so_completion"
 	},
 	"Sales Invoice": {
-		"validate": "bhairav_traders.credit_limit.validate_sales_invoice_return",
+		"validate": [
+			"bhairav_traders.credit_limit.validate_sales_invoice_return",
+			"bhairav_traders.discount.sales_invoice_validate_pricing"
+		],
 		"before_submit": [
 			"bhairav_traders.credit_limit.validate_sales_invoice_locking",
 			"bhairav_traders.credit_limit.validate_advance_payment",

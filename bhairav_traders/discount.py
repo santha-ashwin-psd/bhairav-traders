@@ -83,3 +83,35 @@ def create_early_payment_credit_note(invoice, payment_entry_name, discount_pct, 
     except Exception as e:
         frappe.log_error(f"Error auto-generating Credit Note for Payment Entry {payment_entry_name}: {e}")
         frappe.msgprint(_("Could not auto-generate Credit Note for early payment discount: {0}").format(str(e)))
+
+def sales_invoice_validate_pricing(doc, method=None):
+    """
+    Auto-populates the custom_pricing_rule and custom_promotional_scheme
+    fields on Sales Invoice items based on the hidden pricing_rules field.
+    """
+    if not getattr(doc, "items", None):
+        return
+        
+    for item in doc.items:
+        if getattr(item, "pricing_rules", None):
+            pr_value = item.pricing_rules
+            pr_name = None
+            try:
+                parsed = frappe.parse_json(pr_value)
+                if isinstance(parsed, list) and parsed:
+                    pr_name = parsed[0]
+                elif isinstance(parsed, str):
+                    pr_name = parsed
+            except Exception:
+                pr_name = str(pr_value).split(",")[0].strip()
+                
+            if not pr_name:
+                continue
+
+            item.custom_pricing_rule = pr_name
+            
+            # Retrieve the promotional scheme from the Pricing Rule
+            if frappe.db.exists("Pricing Rule", pr_name):
+                promo_scheme = frappe.db.get_value("Pricing Rule", pr_name, "promotional_scheme")
+                if promo_scheme:
+                    item.custom_promotional_scheme = promo_scheme
