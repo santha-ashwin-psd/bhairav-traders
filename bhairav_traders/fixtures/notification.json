@@ -1298,7 +1298,7 @@
   "filters": null,
   "from_attach_field": null,
   "is_standard": 0,
-  "message": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>This is an urgent notice that your payment for invoice <strong>{{ doc.name }}</strong> is now over 30 days overdue. Please process the payment immediately.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "message": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>This is a reminder that your payment for invoice <strong>{{ doc.name }}</strong> is due today. Please ensure the payment is processed on time.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
   "message_type": "Markdown",
   "method": null,
   "minutes_offset": 0,
@@ -1343,7 +1343,7 @@
   "filters": null,
   "from_attach_field": null,
   "is_standard": 0,
-  "message": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>We have received a partial payment towards invoice <strong>{{ doc.name }}</strong>. Thank you for your payment. Please ensure the remaining balance is cleared.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "message": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>This is an urgent notice that your payment for invoice <strong>{{ doc.name }}</strong> is now overdue. Please process the payment immediately.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
   "message_type": "Markdown",
   "method": null,
   "minutes_offset": 0,
@@ -1635,7 +1635,7 @@
     "cc": null,
     "condition": null,
     "receiver_by_document_field": null,
-    "receiver_by_role": "Sales User"
+    "receiver_by_role": "Salesman"
    }
   ],
   "send_system_notification": 0,
@@ -1870,6 +1870,51 @@
   "set_property_after_alert": null,
   "slack_webhook_url": null,
   "subject": "Support Ticket Received: {{ doc.name }} - {{ doc.subject }}",
+  "value_changed": null
+ },
+ {
+  "attach_files": "",
+  "attach_print": 1,
+  "channel": "Email",
+  "condition": "",
+  "condition_type": "Python",
+  "date_changed": null,
+  "datetime_changed": null,
+  "datetime_last_run": null,
+  "days_in_advance": 0,
+  "docstatus": 0,
+  "doctype": "Notification",
+  "document_type": "Payment Request",
+  "enabled": 1,
+  "event": "Submit",
+  "filters": null,
+  "from_attach_field": null,
+  "is_standard": 0,
+  "message": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.party_name or 'Customer' }},</p>\n<p>A new Payment Request has been generated for your recent order/invoice <strong>{{ doc.reference_name }}</strong>.</p>\n<p><strong>Amount Due:</strong> {{ doc.currency }} {{ doc.grand_total }}<br>\n<strong>Request Date:</strong> {{ doc.transaction_date }}</p>\n{% if doc.payment_url %}\n<p>You can complete your payment securely by clicking the link below:</p>\n<p><a href=\"{{ doc.payment_url }}\" style=\"display:inline-block;padding:10px 15px;background:#0b5cab;color:#fff;text-decoration:none;border-radius:4px;\">Pay Now</a></p>\n{% endif %}\n<p>If you have already paid this amount, please ignore this email.</p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p>\n</div></div>",
+  "message_type": "Markdown",
+  "method": null,
+  "minutes_offset": 0,
+  "modified": "2026-08-28 11:30:00.000000",
+  "module": "Bhairav Traders",
+  "name": "ATU-EMAIL-PAYREQ-001 - Payment Request",
+  "print_format": null,
+  "property_value": null,
+  "recipients": [
+   {
+    "bcc": null,
+    "cc": null,
+    "condition": null,
+    "receiver_by_document_field": "email_to",
+    "receiver_by_role": null
+   }
+  ],
+  "send_system_notification": 0,
+  "send_to_all_assignees": 0,
+  "sender": null,
+  "sender_email": null,
+  "set_property_after_alert": null,
+  "slack_webhook_url": null,
+  "subject": "Payment Request for {{ doc.reference_name }}",
   "value_changed": null
  }
 ]
