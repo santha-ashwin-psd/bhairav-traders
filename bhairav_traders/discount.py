@@ -72,6 +72,7 @@ def create_early_payment_credit_note(invoice, payment_entry_name, discount_pct, 
         first_item.description = f"Early Payment Discount ({discount_pct}%)"
         
         cn.flags.ignore_permissions = True
+        cn.flags.is_auto_discount = True
         cn.insert(ignore_permissions=True)
         cn.submit()
         
@@ -80,6 +81,47 @@ def create_early_payment_credit_note(invoice, payment_entry_name, discount_pct, 
                 cn.name, discount_amount, discount_pct, invoice.name
             )
         )
+        
+        # Determine the correct template based on discount percentage
+        template_name = None
+        if discount_pct == 3.0:
+            template_name = "ATU-EMAIL-568"
+        elif discount_pct == 2.0:
+            template_name = "ATU-EMAIL-569"
+        elif discount_pct == 1.0:
+            template_name = "ATU-EMAIL-570"
+            
+        if template_name and invoice.contact_email:
+            try:
+                # Fetch the HTML content of the template
+                email_template = frappe.get_doc("Email Template", template_name)
+                message = frappe.render_template(email_template.response_html, {"doc": cn})
+                
+                # Get Accounts Executives to CC them
+                cc_emails = frappe.db.sql_list("""
+                    SELECT DISTINCT user.email
+                    FROM `tabUser` user, `tabHas Role` role
+                    WHERE user.name = role.parent
+                    AND user.enabled = 1
+                    AND role.role = 'Accounts Executive'
+                    AND user.email IS NOT NULL
+                """)
+                
+                frappe.sendmail(
+                    recipients=[invoice.contact_email],
+                    cc=cc_emails,
+                    subject=frappe.render_template(email_template.subject, {"doc": cn}),
+                    message=message,
+                    reference_doctype="Sales Invoice",
+                    reference_name=cn.name,
+                    attachments=[{
+                        "print_format_attachment": 1,
+                        "doctype": "Sales Invoice",
+                        "name": cn.name
+                    }]
+                )
+            except Exception as e:
+                frappe.log_error(f"Failed to send discount email {template_name} for CN {cn.name}: {e}")
     except Exception as e:
         frappe.log_error(f"Error auto-generating Credit Note for Payment Entry {payment_entry_name}: {e}")
         frappe.msgprint(_("Could not auto-generate Credit Note for early payment discount: {0}").format(str(e)))

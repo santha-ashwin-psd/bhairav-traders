@@ -14,3 +14,6 @@ class CustomerSupportRequest(Document):
             customer = get_current_customer()
             if customer:
                 self.customer = customer
+                
+        if self.customer and not self.email:
+            self.email = frappe.db.get_value("Customer", self.customer, "email_id")

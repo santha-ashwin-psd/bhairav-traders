@@ -15,11 +15,27 @@ def delivery_note_before_save(doc, method=None):
 
     requires_validation = (doc.workflow_state and doc.workflow_state != "Draft") or doc.docstatus == 1
     if requires_validation:
+        def send_alert():
+            try:
+                template = frappe.get_doc("Email Template", "ATU-EMAIL-728")
+                message = frappe.render_template(template.response_html, {"doc": doc})
+                frappe.sendmail(
+                    recipients=[frappe.session.user],
+                    subject=frappe.render_template(template.subject, {"doc": doc}),
+                    message=message,
+                    reference_doctype=doc.doctype,
+                    reference_name=doc.name
+                )
+            except Exception:
+                pass
+                
         if not doc.shipping_address_name:
+            send_alert()
             frappe.throw(_("Dispatch Blocked: Shipping Address is required."))
             
         # Assume Transporter Details mean transporter or distance
         if not getattr(doc, "transporter", None) and not getattr(doc, "distance", None):
+            send_alert()
             frappe.throw(_("E-Way Bill Blocked: Transporter Details are missing. Please provide Transporter or Distance."))
 
 def validate_single_pick_list(doc, method=None):

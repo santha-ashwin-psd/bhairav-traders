@@ -1,0 +1,322 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.030321",
+  "name": "ATU-EMAIL-001",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.058985",
+  "name": "ATU-EMAIL-031",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 confirmation",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.117345",
+  "name": "ATU-EMAIL-053",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 status update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.144533",
+  "name": "ATU-EMAIL-281",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 confirmation",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.168873",
+  "name": "ATU-EMAIL-076",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.195203",
+  "name": "ATU-EMAIL-521",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.218467",
+  "name": "ATU-EMAIL-525",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 approval required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 16:03:52.463967",
+  "name": "ATU-EMAIL-108",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Good news! Your order <strong>{{ doc.name }}</strong> has been approved and dispatched. Please find the delivery details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Good news! Your order <strong>{{ doc.name }}</strong> has been approved and dispatched. Please find the delivery details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 document enclosed",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 16:31:12.806992",
+  "name": "ATU-EMAIL-133",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Your Sales Invoice <strong>{{ doc.name }}</strong> has been generated successfully. Please find the details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Your Sales Invoice <strong>{{ doc.name }}</strong> has been generated successfully. Please find the details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 status update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 16:31:13.722395",
+  "name": "ATU-EMAIL-198",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.party_name or 'Customer' }},</p>\n<p>We have successfully received your payment of <strong>{{ doc.paid_amount }}</strong> against <strong>{{ doc.name }}</strong>. Thank you for your payment.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.party_name or 'Customer' }},</p>\n<p>We have successfully received your payment of <strong>{{ doc.paid_amount }}</strong> against <strong>{{ doc.name }}</strong>. Thank you for your payment.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 status update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.320621",
+  "name": "ATU-EMAIL-178",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.345289",
+  "name": "ATU-EMAIL-666",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 status update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 10:35:57.369161",
+  "name": "ATU-EMAIL-576",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 status update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.522999",
+  "name": "ATU-EMAIL-301",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Good news! Your order <strong>{{ doc.name }}</strong> has been dispatched. Please find the delivery details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Good news! Your order <strong>{{ doc.name }}</strong> has been dispatched. Please find the delivery details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 confirmation",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:27.167389",
+  "name": "ATU-EMAIL-078",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Your order <strong>{{ doc.name }}</strong> is awaiting your final approval. Please review the details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Your order <strong>{{ doc.name }}</strong> is awaiting your final approval. Please review the details below.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 status update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.492439",
+  "name": "ATU-EMAIL-091",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Sales Team,</p>\n<p>Reminder: The order <strong>{{ doc.name }}</strong> has been stuck in the Draft state for over 3 days. Please review and process it.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Sales Team,</p>\n<p>Reminder: The order <strong>{{ doc.name }}</strong> has been stuck in the Draft state for over 3 days. Please review and process it.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 exception alert",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.264164",
+  "name": "ATU-EMAIL-097",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Warehouse Manager,</p>\n<p>Great news! The customer has approved order <strong>{{ doc.name }}</strong>. Please proceed with the next steps for fulfillment.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Warehouse Manager,</p>\n<p>Great news! The customer has approved order <strong>{{ doc.name }}</strong>. Please proceed with the next steps for fulfillment.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 document enclosed",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.311990",
+  "name": "ATU-EMAIL-098",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Warehouse Manager,</p>\n<p>Attention: The customer has rejected order <strong>{{ doc.name }}</strong>. Please follow up with them to address their concerns.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Warehouse Manager,</p>\n<p>Attention: The customer has rejected order <strong>{{ doc.name }}</strong>. Please follow up with them to address their concerns.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 payment update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.468455",
+  "name": "ATU-EMAIL-105",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Your order <strong>{{ doc.name }}</strong> has been fully invoiced. You will find the final invoice details below.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Your order <strong>{{ doc.name }}</strong> has been fully invoiced. You will find the final invoice details below.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 document enclosed",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.419049",
+  "name": "ATU-EMAIL-109",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Dispatch Executive,</p>\n<p>A new order <strong>{{ doc.name }}</strong> is ready for dispatch and is pending your Quality Control (QC) verification. Please review and verify.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Dispatch Executive,</p>\n<p>A new order <strong>{{ doc.name }}</strong> is ready for dispatch and is pending your Quality Control (QC) verification. Please review and verify.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 reminder",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.616917",
+  "name": "ATU-EMAIL-135",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Finance Team,</p>\n<p>A Sales Return <strong>{{ doc.name }}</strong> has been requested and requires your managerial review and approval.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Finance Team,</p>\n<p>A Sales Return <strong>{{ doc.name }}</strong> has been requested and requires your managerial review and approval.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 approval required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.647845",
+  "name": "ATU-EMAIL-222",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>This is a friendly reminder that the payment for invoice <strong>{{ doc.name }}</strong> will be due in exactly 7 days. We appreciate your prompt payment.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>This is a friendly reminder that the payment for invoice <strong>{{ doc.name }}</strong> will be due in exactly 7 days. We appreciate your prompt payment.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 payment update",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.676241",
+  "name": "ATU-EMAIL-232",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>This is an urgent notice that your payment for invoice <strong>{{ doc.name }}</strong> is now over 30 days overdue. Please process the payment immediately.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>This is an urgent notice that your payment for invoice <strong>{{ doc.name }}</strong> is now over 30 days overdue. Please process the payment immediately.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.705139",
+  "name": "ATU-EMAIL-240",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>We have received a partial payment towards invoice <strong>{{ doc.name }}</strong>. Thank you for your payment. Please ensure the remaining balance is cleared.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>We have received a partial payment towards invoice <strong>{{ doc.name }}</strong>. Thank you for your payment. Please ensure the remaining balance is cleared.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.737407",
+  "name": "ATU-EMAIL-568",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Thank you for your prompt payment! As a reward for paying within 15 days, we have applied a <strong>3% discount</strong> to your account via Credit Note <strong>{{ doc.name }}</strong>.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Thank you for your prompt payment! As a reward for paying within 15 days, we have applied a <strong>3% discount</strong> to your account via Credit Note <strong>{{ doc.name }}</strong>.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 exception alert",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.769925",
+  "name": "ATU-EMAIL-569",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Thank you for your prompt payment! As a reward for paying within 30 days, we have applied a <strong>2% discount</strong> to your account via Credit Note <strong>{{ doc.name }}</strong>.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Thank you for your prompt payment! As a reward for paying within 30 days, we have applied a <strong>2% discount</strong> to your account via Credit Note <strong>{{ doc.name }}</strong>.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.798546",
+  "name": "ATU-EMAIL-570",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Thank you for your payment! As a reward for paying within 45 days, we have applied a <strong>1% discount</strong> to your account via Credit Note <strong>{{ doc.name }}</strong>.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name or 'Customer' }},</p>\n<p>Thank you for your payment! As a reward for paying within 45 days, we have applied a <strong>1% discount</strong> to your account via Credit Note <strong>{{ doc.name }}</strong>.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 confirmation",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.210301",
+  "name": "ATU-EMAIL-694",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {% if doc.workflow_state %}{{ doc.workflow_state.replace('Pending ', '').replace(' Approval', '').replace(' Check', '') }}{% else %}Team{% endif %},</p>\n<p>This is an automated workflow alert. The order <strong>{{ doc.name }}</strong> requires your review and approval as it is currently in the <strong>{{ doc.workflow_state }}</strong> stage.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {% if doc.workflow_state %}{{ doc.workflow_state.replace('Pending ', '').replace(' Approval', '').replace(' Check', '') }}{% else %}Team{% endif %},</p>\n<p>This is an automated workflow alert. The order <strong>{{ doc.name }}</strong> requires your review and approval as it is currently in the <strong>{{ doc.workflow_state }}</strong> stage.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 reminder",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 15:41:28.241162",
+  "name": "ATU-EMAIL-728",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Team,</p>\n<p>Alert! The order <strong>{{ doc.name }}</strong> has triggered a system block or credit hold. Immediate attention is required to resolve this issue.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Team,</p>\n<p>Alert! The order <strong>{{ doc.name }}</strong> has triggered a system block or credit hold. Immediate attention is required to resolve this issue.</p>\n<p><strong>Document:</strong> {{ doc.name }}<br>\n<strong>Date:</strong> {{ doc.transaction_date or doc.posting_date or \"\" }}<br>\n<strong>Amount:</strong> {{ doc.grand_total or doc.total or \"\" }}</p>\n<p>Thank you for your continued association with ATULYA ELECTRICAL PVT. LTD.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p></div></div>",
+  "subject": "{{ doc.name }} \u2013 exception alert",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 13:56:54.477842",
+  "name": "ATU-EMAIL-729",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\"><p>Dear {{ doc.customer_name or doc.supplier_name or doc.employee_name or \"Sir/Madam\" }},</p>\n<p>This is an automated notification regarding <strong>{{ doc.name }}</strong>.</p>\n<p>Please review the document and take the required action, if any.</p>\n<p>Reference: <strong>{{ doc.name }}</strong></p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p></div></div>",
+  "subject": "{{ doc.name }} \u2013 action required",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 16:51:22.267165",
+  "name": "ATU-EMAIL-PORTAL-ORDER",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Sales Team,</p>\n<p>A new order <strong>{{ doc.name }}</strong> has been placed by a customer through the portal.</p>\n<p><strong>Customer:</strong> {{ doc.customer_name }}<br>\n<strong>Amount:</strong> {{ doc.grand_total }}<br>\n<strong>Date:</strong> {{ doc.transaction_date }}</p>\n<p>Please review and process the order.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p>\n</div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear Sales Team,</p>\n<p>A new order <strong>{{ doc.name }}</strong> has been placed by a customer through the portal.</p>\n<p><strong>Customer:</strong> {{ doc.customer_name }}<br>\n<strong>Amount:</strong> {{ doc.grand_total }}<br>\n<strong>Date:</strong> {{ doc.transaction_date }}</p>\n<p>Please review and process the order.</p>\n<p>Regards,<br>ATULYA ELECTRICAL PVT. LTD.</p>\n</div></div>",
+  "subject": "New Portal Order Received - {{ doc.name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-08-27 17:35:43.115992",
+  "name": "ATU-EMAIL-WELCOME",
+  "response": "<div style=\"font-family:Arial , sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name }},</p>\n<p>Welcome to Atulya Electrical Pvt. Ltd.! We are thrilled to have you on board as a valued customer.</p>\n<p>We look forward to serving you and providing you with the best electrical solutions.</p>\n<p>If you have any questions, feel free to reach out to our team at any time.</p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p>\n</div></div>",
+  "response_html": "<div style=\"font-family:Arial,sans-serif;color:#1f2937\">\n<div style=\"background:#0b5cab;color:#fff;padding:18px\"><strong>ATULYA ELECTRICAL PVT. LTD.</strong></div>\n<div style=\"padding:22px\">\n<p>Dear {{ doc.customer_name }},</p>\n<p>Welcome to Atulya Electrical Pvt. Ltd.! We are thrilled to have you on board as a valued customer.</p>\n<p>We look forward to serving you and providing you with the best electrical solutions.</p>\n<p>If you have any questions, feel free to reach out to our team at any time.</p>\n<p>Regards,<br><strong>ATULYA ELECTRICAL PVT. LTD.</strong></p>\n</div></div>",
+  "subject": "Welcome to Atulya Electrical Pvt. Ltd.!",
+  "use_html": 1
+ }
+]

@@ -120,15 +120,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2026-08-19 12:16:15.453006",
-  "name": "Approved & Dispatched",
-  "style": "Success",
-  "workflow_state_name": "Approved & Dispatched"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2026-08-19 12:22:35.689171",
   "name": "Pending Accounts Verification",
   "style": "Warning",
@@ -336,15 +327,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2026-08-19 12:08:25.137831",
-  "name": "Pending Customer Approval",
-  "style": "Warning",
-  "workflow_state_name": "Pending Customer Approval"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2026-08-20 09:57:55.553327",
   "name": "Pending Director Approval",
   "style": "Warning",
@@ -358,6 +340,24 @@
   "name": "Pending Regional Manager Approval",
   "style": "Warning",
   "workflow_state_name": "Pending Regional Manager Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:16:15.453006",
+  "name": "Approved & Dispatched",
+  "style": "Success",
+  "workflow_state_name": "Approved & Dispatched"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-19 12:08:25.137831",
+  "name": "Pending Customer Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Customer Approval"
  },
  {
   "docstatus": 0,

@@ -262,6 +262,9 @@ def validate_sales_invoice_locking(doc, method=None):
         return
         
     if getattr(doc, "is_return", 0):
+        if getattr(doc.flags, "is_auto_discount", False):
+            return
+
         if getattr(doc, "workflow_state", None) and doc.workflow_state != "Return Approved":
             frappe.throw(_("Return Blocked: Credit Note must be 'Return Approved' before submission."))
             

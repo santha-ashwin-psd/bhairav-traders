@@ -162,6 +162,9 @@ has_permission = {
 # Hook on document methods and events
 
 doc_events = {
+	"Communication": {
+		"before_insert": "bhairav_traders.utils.communications.change_comm_type"
+	},
 	"Sales Order": {
 		"validate": [
 			"bhairav_traders.credit_limit.validate_sales_order_credit",
@@ -311,6 +314,7 @@ extend_doctype_class = {
 
 fixtures = [
     "Role",
+    "Customer Group",
     {"dt": "Custom Field", "filters": [["name", "not in", ["Sales Invoice-e_way_bill_no", "Sales Invoice-irn"]]]},
     "Property Setter",
     "Custom DocPerm",
@@ -320,5 +324,6 @@ fixtures = [
     {"dt": "Workflow", "filters": [["name", "like", "Atulya%"]]},
     "Workflow State",
     "Workflow Action Master",
-    "Notification"
+    "Notification",
+    {"dt": "Email Template", "filters": [["name", "like", "ATU-EMAIL%"]]}
 ]
