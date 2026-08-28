@@ -117,6 +117,10 @@ def create_customer_order(items_json):
     frappe.flags.ignore_permissions = True
     try:
         so.insert(ignore_permissions=True)
+        so.submit(ignore_permissions=True)
+    except Exception:
+        frappe.db.rollback()
+        raise
     finally:
         frappe.flags.ignore_permissions = False
 

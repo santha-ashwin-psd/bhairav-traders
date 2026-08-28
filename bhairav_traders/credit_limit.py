@@ -392,6 +392,22 @@ def sales_order_on_update(doc, method=None):
             doc.workflow_state = next_state
             doc.credit_check_status = "Approved"
             doc.add_comment("Comment", text=f"Workflow state automatically advanced to {next_state} due to sufficient available credit.")
+            if next_state == "Customer Approved" and doc.docstatus == 0:
+                frappe.enqueue("bhairav_traders.credit_limit.submit_sales_order_background", docname=doc.name, enqueue_after_commit=True)
+
+def submit_sales_order_background(docname):
+    original_user = frappe.session.user
+    frappe.set_user("Administrator")
+    try:
+        doc = frappe.get_doc("Sales Order", docname)
+        if doc.docstatus == 0 and doc.workflow_state == "Customer Approved":
+            doc.submit()
+            doc.set_status(update=True)
+            doc.save()
+    except Exception:
+        frappe.log_error(frappe.get_traceback(), f"Failed to auto-submit Sales Order {docname}")
+    finally:
+        frappe.set_user(original_user)
 def sales_invoice_on_submit(doc, method=None):
     """
     Called on_submit of Sales Invoice.
@@ -530,4 +546,3 @@ def validate_sales_invoice_return(doc, method=None):
     
     if doc.custom_return_reason:
         doc.custom_credit_note_reason = reason_map.get(doc.custom_return_reason, doc.custom_return_reason)
-
