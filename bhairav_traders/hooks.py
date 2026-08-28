@@ -314,7 +314,6 @@ extend_doctype_class = {
 
 fixtures = [
     "Role",
-    "Customer Group",
     {"dt": "Custom Field", "filters": [["name", "not in", ["Sales Invoice-e_way_bill_no", "Sales Invoice-irn"]]]},
     "Property Setter",
     "Custom DocPerm",
