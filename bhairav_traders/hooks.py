@@ -162,6 +162,9 @@ has_permission = {
 # Hook on document methods and events
 
 doc_events = {
+	"Customer": {
+		"on_update": "bhairav_traders.credit_limit.customer_on_update"
+	},
 	"Communication": {
 		"before_insert": "bhairav_traders.utils.communications.change_comm_type"
 	},

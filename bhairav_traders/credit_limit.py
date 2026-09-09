@@ -11,6 +11,9 @@ def is_salesman_user(user):
     sales_roles = {"Salesman", "Salesman", "System Manager", "Finance Manager", "Director"}
     return bool(sales_roles.intersection(user_roles))
 
+def customer_on_update(doc, method):
+    check_account_lock_status(doc.name)
+
 def check_account_lock_status(customer_name):
     """
     Checks if customer has unpaid invoices exceeding credit_days_allowed (default 60 days).

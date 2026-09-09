@@ -21,9 +21,10 @@ def payment_entry_on_submit(doc, method=None):
             
         invoice = frappe.get_doc("Sales Invoice", ref.reference_name)
         invoice_date = getdate(invoice.posting_date)
+        due_date = getdate(invoice.due_date)
         days = date_diff(payment_date, invoice_date)
         
-        if days < 0:
+        if days < 0 or payment_date > due_date:
             continue
             
         discount_pct = 0.0
